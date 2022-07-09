@@ -102,3 +102,15 @@
     
 })(jQuery);
 
+$(document).ready(function() {    
+
+    $(".login-vendor").hide();
+    
+    checkBox = document.getElementById('check-seller').addEventListener('click', event => {
+        if(event.target.checked) {
+            $(".login-vendor").show();
+        }else{
+            $(".login-vendor").hide();
+        }
+    });
+});

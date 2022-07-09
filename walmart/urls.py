@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from . import views
+from django.urls import include
+from . import views,user_login
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HOME,name="home"),
@@ -25,5 +27,9 @@ urlpatterns = [
     path('contact/', views.CONTACT,name="contact"),
     path('shop/', views.SHOP,name="shop"),
     path('about/', views.ABOUT,name="about"),
+    path('dologin/', user_login.LOGIN,name="dologin"),
+    path('accounts/register', user_login.REGISTER,name="register"),
+    path('accounts/',include('django.contrib.auth.urls')),
+    path('logout/',user_login.LOGOUT,name='logout'),
     
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

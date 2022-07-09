@@ -42,14 +42,22 @@
                         <a href=" {% url 'home' %} " class="nav-item nav-link active">Home</a>
                         <a href=" {% url 'shop' %} " class="nav-item nav-link">Shop</a>
                         <a href="" class="nav-item nav-link">Cart</a>
-                        {% comment %} <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
-                            <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                <a href="checkout.html" class="dropdown-item">Checkout</a>
-                            </div>
-                        </div> {% endcomment %}
+                        
                         <a href=" {% url 'contact' %} " class="nav-item nav-link">Contact</a>
+
+                        {% if user.is_authenticated %}
+                            <div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown">{{user.username | capfirst}} <i class="fa fa-angle-down mt-1"></i></a>
+                                <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                                    <a href="cart.html" class="dropdown-item">Account</a>
+                                    <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                                </div>
+                            </div>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
+                        {% endif %}
+
+                        
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                         <a href="" class="btn px-0">
