@@ -55,3 +55,31 @@ def REGISTER(request):
 def LOGOUT(request):
     logout(request)
     return redirect('login')
+
+def PROFILE(request):
+    vendor_check = Vendor.objects.filter(user=request.user)
+    data = {
+        'vendor':vendor_check.first,
+    }
+    
+    return render(request,'Main/myaccount.html',data)
+
+def PROFILEUPDATE(request):
+    
+    if request.method == "POST":
+        fname = request.POST.get('firstname')
+        lname = request.POST.get('lastname')
+        email = request.POST.get('email')
+        pwd = request.POST.get('password')
+
+        userid = request.user.id
+        user = User.objects.get(id=userid)
+        user.first_name = fname
+        user.last_name = lname
+
+        if pwd != None and pwd != "":
+            user.set_password(pwd)
+        user.save()
+        return redirect('profile')
+    
+    return None

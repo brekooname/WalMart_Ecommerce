@@ -42,9 +42,9 @@
                             <div class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown">{{user.username | capfirst}} <i class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="cart.html" class="dropdown-item">Account <i class="w-icon-tshirt2"></i></a>
+                                    <a href=" {% url 'profile' %} " class="dropdown-item">Account <i class="w-icon-tshirt2"></i></a>
                                     {% if vendor is not None %}
-                                        <a href="" class="dropdown-item">Your Shop</a>
+                                        <a href=" {% url 'vendor' %} " class="dropdown-item">Your Shop</a>
                                     {% endif %}
                                     <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
                                 </div>

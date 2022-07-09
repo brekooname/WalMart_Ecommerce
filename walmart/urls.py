@@ -29,7 +29,12 @@ urlpatterns = [
     path('about/', views.ABOUT,name="about"),
     path('dologin/', user_login.LOGIN,name="dologin"),
     path('accounts/register', user_login.REGISTER,name="register"),
+    path('accounts/profile', user_login.PROFILE,name="profile"),
+    path('accounts/profile/update', user_login.PROFILEUPDATE,name="profileupdate"),
     path('accounts/',include('django.contrib.auth.urls')),
     path('logout/',user_login.LOGOUT,name='logout'),
+    path('vendor/',views.VENDOR,name='vendor'),
+    path('vendor/add-product/',views.ADDPRODUCT,name='add-product'),
+    path('product/<cat>/<scat>/<slug>',views.DETAIL_PRODUCT,name='detail_product'),
     
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

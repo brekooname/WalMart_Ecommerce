@@ -9,6 +9,8 @@ class Sub_tublar(admin.TabularInline):
 class category_admin(admin.ModelAdmin):
     inlines = (Sub_tublar,)
 
+
 admin.site.register(Vendor)
 admin.site.register(Category,category_admin)
 admin.site.register(SubCategory)
+admin.site.register(Product)
