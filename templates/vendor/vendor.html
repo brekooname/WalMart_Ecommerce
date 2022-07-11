@@ -3,7 +3,7 @@
 {% block content %}
 {% load product_tags %}
         <!-- Start of Main -->
-        <main class="main">
+        <main class="main" style="background-color: white;">
             <!-- Start of Page Header -->
             <div class="page-header">
                 <div class="container">
@@ -27,36 +27,36 @@
             <div class="page-content pt-2">
                 <div class="container">
                     <div class="tab tab-vertical row gutter-lg">
-                        <ul class="nav nav-tabs mb-6" role="tablist">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a href="#vendor-dashboard" class="nav-link">Dashboard</a>
+                                <a href="#vendor-dashboard"  id="dashboard-tab" data-toggle="tab"  role="tab" aria-controls="dashboard" aria-selected="true" class="nav-link">Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#vendor-newproduct" class="nav-link">Add Product</a>
+                                <a href="#vendor-newproduct"  id="newproduct-tab" data-toggle="tab"  role="tab" aria-controls="newproduct" aria-selected="true" class="nav-link">Add Product</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#vendor-allproduct" class="nav-link">Show Product</a>
+                                <a href="#vendor-allproduct"  id="allproduct-tab" data-toggle="tab"  role="tab" aria-controls="allproduct" aria-selected="true" class="nav-link">Show Product</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#vendor-allproduct" class="nav-link">Order</a>
+                                <a href="#vendor-order"  id="order-tab" data-toggle="tab"  role="tab" aria-controls="order" aria-selected="true" class="nav-link">Order</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#vendor-allproduct" class="nav-link">History</a>
+                                <a href="#vendor-history"  id="history-tab" data-toggle="tab"  role="tab" aria-controls="history" aria-selected="true" class="nav-link">History</a>
                             </li>
 
                         </ul>
 
-                        <div class="container-fluid col-xl-8">
-                            <div class="tab-content m-4">
-                                <div class="tab-pane active" id="vendor-dashboard">
-                                    <div class="container d-xl-flex d-md-block">
-                                        <div class="card m-3">
+                        <div class="container-fluid" style="background-color: white;display: flex;justify-content: center;">
+                            <div class="tab-content m-4" id="myTabContent" >
+                                <div class="tab-pane active" id="vendor-dashboard" id="vendor-dashboard" role="tabpanel" aria-labelledby="dashboard">
+                                    <div class="container" style="display: flex;">
+                                        <div class="card m-3" style="margin: 15px;">
                                             <div class="card-body">
                                                 <h4 class="card-title">Total Product</h4>
                                                 <p class="card-text"> {{product.all.count}} </p>
                                             </div>
                                         </div>
-                                        <div class="card m-3">
+                                        <div class="card m-3" style="margin: 15px;">
                                             <div class="card-body">
                                                 <h4 class="card-title">Active Product</h4>
                                                 <p class="card-text">{{activeproduct.all.count}}</p>
@@ -64,7 +64,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="vendor-newproduct">
+                                <div class="tab-pane" id="vendor-newproduct" id="vendor-newproduct" role="tabpanel" aria-labelledby="newproduct">
                                     <div class="icon-box icon-box-side icon-box-light">
                                         <span class="icon-box-icon icon-account mr-2">
                                             <i class="w-icon-user"></i>
@@ -78,8 +78,8 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="maincategory">Main Category *</label>
-                                                    <select class="form-control form-control-md mb-0" name="maincategory" id="maincategory" onchange="getSubCat()">
+                                                    <label class="info-title" for="maincategory">Main Category *</label>
+                                                    <select class="unicase-form-control text-input form-control form-control-md mb-0" name="maincategory" id="maincategory" onchange="getSubCat()">
                                                         {% for mc in categoryall %}
                                                             <option value="{{mc.id}}">{{mc.title}}</option>
                                                         {% endfor %}
@@ -88,9 +88,9 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="subcategory">Sub Category *  </label>
+                                                    <label class="info-title" for="subcategory">Sub Category *  </label>
                                                     
-                                                    <select class="form-control form-control-md mb-0" name="subcategory">
+                                                    <select class="unicase-form-control text-input form-control form-control-md mb-0" name="subcategory">
                                                         {% for sc in subcategory %}
                                                             <option value="{{sc.id}}">{{sc}}</option>
                                                         {% endfor %}
@@ -101,53 +101,53 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group mb-3">
-                                                    <input type="file" name="image1" id="">
+                                                    <input type="file" name="unicase-form-control text-input image1" id="">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group mb-6">
-                                                    <input type="file" name="image2" id="">
+                                                    <input type="file" name="unicase-form-control text-input image2" id="">
                                                 </div>
                                             </div>
                                         </div>
                                       
                                         <div class="form-group mb-3">
-                                            <label class="text-dark display-5" for="title">Product Title</label>
-                                            <input type="text" class="form-control form-control-md" id="title"  name="title">
+                                            <label  class="info-title text-dark display-5" for="title">Product Title</label>
+                                            <input type="text" class="unicase-form-control text-input form-control form-control-md" id="title"  name="title">
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label class="text-dark display-5" for="description">Product Description</label><br>
+                                            <label  class="info-title text-dark display-5" for="description">Product Description</label><br>
                                             <textarea name="description" id="description" ></textarea>
                                         </div>
 
                                         <div class="row mb-4">
                                             <div class="col-md-4">
-                                                <label class="text-dark display-5" for="price">Product Price</label>
-                                                <input type="number" class="form-control form-control-md" id="price"  name="price">
+                                                <label  class="info-title text-dark display-5" for="price">Product Price</label>
+                                                <input type="number" class="unicase-form-control text-input form-control form-control-md" id="price"  name="price">
                                             </div>
                                             <div class="col-md-4">
-                                                <label class="text-dark display-5" for="discount">Product Discount</label>
-                                                <input type="number" class="form-control form-control-md" id="discount"  name="discount">
+                                                <label  class="info-title text-dark display-5" for="discount">Product Discount</label>
+                                                <input type="number" class="unicase-form-control text-input form-control form-control-md" id="discount"  name="discount">
                                             </div>
                                             <div class="col-md-4">
-                                                <label class="text-dark display-5" for="stock">Product Stock</label>
-                                                <input type="number" class="form-control form-control-md" id="stock"  name="stock">
+                                                <label  class="info-title text-dark display-5" for="stock">Product Stock</label>
+                                                <input type="number" class="unicase-form-control text-input form-control form-control-md" id="stock"  name="stock">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <div class="col-md-4">
-                                                <label class="text-dark display-5" for="size">Product Size</label>
-                                                <input type="text" class="form-control form-control-md" id="size"  name="size">
+                                                <label  class="info-title text-dark display-5" for="size">Product Size</label>
+                                                <input type="text" class="unicase-form-control text-input form-control form-control-md" id="size"  name="size">
                                             </div>
                                             <div class="col-md-4">
-                                                <label class="text-dark display-5" for="color">Product Color</label>
-                                                <input type="text" class="form-control form-control-md" id="color"  name="color">
+                                                <label  class="info-title text-dark display-5" for="color">Product Color</label>
+                                                <input type="text" class="unicase-form-control text-input form-control form-control-md" id="color"  name="color">
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label>Product Status *  </label>
+                                                    <label class="info-title ">Product Status *  </label>
                                                     
-                                                    <select class="form-control form-control-md mb-0" name="status">
+                                                    <select class="unicase-form-control text-input form-control form-control-md mb-0" name="status">
                                                             <option value="PUBLISH">PUBLISH</option>
                                                             <option value="DRAFT">DRAFT</option>
                                                     </select>
@@ -155,10 +155,10 @@
                                             </div>
                                         </div>
 
-                                        <button type="submit" class="btn btn-dark btn-rounded btn-sm mb-4">ADD</button>
+                                        <button type="submit" class="btn-upper btn btn-primary">ADD PRODUCT</button>
                                     </form>
                                 </div>
-                                <div class="tab-pane" id="vendor-allproduct">
+                                <div class="tab-pane" id="vendor-allproduct" id="vendor-allproduct" role="tabpanel" aria-labelledby="allproduct">
                                     <table class="table">
                                         <thead>
                                           <tr>
