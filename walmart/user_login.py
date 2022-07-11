@@ -57,9 +57,9 @@ def LOGOUT(request):
     return redirect('login')
 
 def PROFILE(request):
-    vendor_check = Vendor.objects.filter(user=request.user)
+    vendor_check = Vendor.objects.all()
     data = {
-        'vendor':vendor_check.first,
+        'vendor':vendor_check,
     }
     
     return render(request,'Main/myaccount.html',data)
