@@ -45,7 +45,11 @@
                             </div>
                         </td>
                         <td class="col-md-2">
-                            <a href="#" class="btn-upper btn btn-primary">Add to cart</a>
+							<form class="add-cart-button btn-group" method="get" action=" {% url 'add-cart' %} ">
+								<input type="text" name="slug" value="{{p.product.slug}}" hidden>
+								<input type="text" name="qty" value="1" hidden>
+							  <button class="btn btn-primary cart-btn" type="submit">Add to cart</button>
+							</form>
                         </td>
                         <td class="col-md-1 close-btn">
                             <a href="/accounts/wishlist/remove/{{p.product.slug}}" class=""><i class="fa fa-times"></i></a>

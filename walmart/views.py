@@ -14,11 +14,13 @@ def BASE(request):
 def HOME(request):
     category = Category.objects.all().order_by('id')[:10]
     product = Product.objects.filter(status="PUBLISH").order_by('-id')[:8]
+    cart = Cart.objects.filter(user=request.user).order_by('-id')
     vendor = Vendor.objects.all()
 
     featured_product = Product.objects.filter(status="PUBLISH").annotate(avg = Avg('review__rate')).order_by('-avg')[:8]
 
     data = {
+        'cart':cart,
         'vendor':vendor,
         'category':category,
         'product':product,
@@ -29,8 +31,10 @@ def HOME(request):
 
 def CONTACT(request):
     category = Category.objects.all().order_by('id')[:10]
+    cart = Cart.objects.filter(user=request.user).order_by('-id')
     vendor = Vendor.objects.all()
     data = {
+        'cart':cart,
         'category':category,
     }
     return render(request,"Main/contact.html",data)
@@ -38,8 +42,10 @@ def CONTACT(request):
 def SHOP(request):
     category = Category.objects.all().order_by('id')[:10]
     product = Product.objects.filter(status="PUBLISH").order_by('-id')
+    cart = Cart.objects.filter(user=request.user).order_by('-id')
     vendor = Vendor.objects.all()
     data = {
+        'cart':cart,
         'vendor':vendor,
         'category':category,
         'product':product,
@@ -48,8 +54,10 @@ def SHOP(request):
 
 def ABOUT(request):
     category = Category.objects.all().order_by('id')[:10]
+    cart = Cart.objects.filter(user=request.user).order_by('-id')
     vendor = Vendor.objects.all()
     data = {
+        'cart':cart,
         'category':category,
     }
     return render(request,"Main/about.html",data)
@@ -62,7 +70,9 @@ def VENDOR(request):
     subcategory = SubCategory.objects.all()
     activeproduct = Product.objects.filter(vendor=v,status="PUBLISH")
     product = Product.objects.filter(vendor=v).order_by('-id')
+    cart = Cart.objects.filter(user=request.user).order_by('-id')
     data = {
+        'cart':cart,
         'vendor':vendor,
         'v':v,
         'category':category,
@@ -146,8 +156,10 @@ def DETAIL_PRODUCT(request,cat,scat,slug):
     vendor = Vendor.objects.all()
     product = Product.objects.filter(slug=slug)
     category = Category.objects.all().order_by('id')[:10]
+    cart = Cart.objects.filter(user=request.user).order_by('-id')
     if product.exists():
         data = {
+            'cart':cart,
             'product':product.first,
             'category':category,
             'vendor':vendor,

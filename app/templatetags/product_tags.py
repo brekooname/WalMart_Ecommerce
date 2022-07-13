@@ -70,3 +70,19 @@ def product_star_avg(review):
         avg = (100 * (r['sum'] / count)) / 5
 
         return avg
+
+@register.simple_tag
+def cart_item_total(disprice,qty):
+    return disprice * qty
+
+@register.simple_tag
+def cart_sub_total(cart):
+    subtotal = 0
+    for item in cart:
+        qty = item.quantity
+        price = discount_price(item.product.price,item.product.discount)
+
+        total = qty * price
+        subtotal += total
+
+    return subtotal

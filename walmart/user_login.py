@@ -86,8 +86,10 @@ def PROFILEUPDATE(request):
 
 def WISHLIST(request):
     wishlist = Wishlist.objects.filter(user=request.user).order_by('-id')
+    cart = Cart.objects.filter(user=request.user).order_by('-id')
     vendor = Vendor.objects.all()
     data = {
+        'cart':cart,
         'vendor':vendor,
         'wishlist':wishlist,
     }
@@ -116,5 +118,43 @@ def REMOVEWISHLIST(request,slug):
         wishlist = Wishlist.objects.filter(user=request.user,product=product.first())
         wishlist.delete()
         return redirect('wishlist')
+    else:
+        return redirect('home')
+
+def CART(request):
+    cart = Cart.objects.filter(user=request.user).order_by('-id')
+    vendor = Vendor.objects.all()
+    data = {
+        'vendor':vendor,
+        'cart':cart,
+    }
+    return render(request,'Main/cart.html',data)
+
+def ADDCART(request):
+    slug = request.GET.get('slug')
+    qty = request.GET.get('qty')
+
+    product = Product.objects.filter(slug=slug)
+    if product.exists():
+        check = Cart.objects.filter(user=request.user,product=product.first())
+        if check.exists():
+            return redirect('cart')
+        else:
+            cart = Cart(
+                user=request.user,
+                quantity=qty,
+                product=product.first(),
+            )
+            cart.save()
+            return redirect('cart')
+    else:
+        return redirect('home')
+
+def REMOVECART(request,slug):
+    product = Product.objects.filter(slug=slug)
+    if product.exists():
+        cart = Cart.objects.filter(user=request.user,product=product.first())
+        cart.delete()
+        return redirect('cart')
     else:
         return redirect('home')
