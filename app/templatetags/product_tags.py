@@ -1,6 +1,6 @@
 from django import template
 import math
-
+from django.db.models import Sum
 from app.models import Product, SubCategory, Vendor
 register = template.Library()
 
@@ -62,3 +62,11 @@ def hot_deal_product():
 
     return p
 
+@register.simple_tag
+def product_star_avg(review):
+    r = review.aggregate(sum=Sum('rate'))
+    count = review.count()
+    if count > 0:
+        avg = (100 * (r['sum'] / count)) / 5
+
+        return avg

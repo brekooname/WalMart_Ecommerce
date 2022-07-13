@@ -1,8 +1,10 @@
+from math import prod
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, JsonResponse
 from app.models import *
 from django.core.files.storage import FileSystemStorage
 from django.template.loader import render_to_string
+from django.db.models import Avg
 
 def BASE(request):
     
@@ -13,10 +15,14 @@ def HOME(request):
     category = Category.objects.all().order_by('id')[:10]
     product = Product.objects.filter(status="PUBLISH").order_by('-id')[:8]
     vendor = Vendor.objects.all()
+
+    featured_product = Product.objects.filter(status="PUBLISH").annotate(avg = Avg('review__rate')).order_by('-avg')[:8]
+
     data = {
         'vendor':vendor,
         'category':category,
         'product':product,
+        'featured_product':featured_product,
     }
     
     return render(request,"Main/home.html",data)
@@ -66,6 +72,27 @@ def VENDOR(request):
         'activeproduct':activeproduct,
     }
     return render(request,"vendor/vendor.html",data)
+def PUBLISHPRODUCT(request,status,id):
+
+    product = Product.objects.filter(id=id)
+
+    if product.exists():
+        if status == "DRAFT":
+            p = Product.objects.get(id=id)
+            p.status = "PUBLISH"
+            p.save()
+            return redirect('vendor')
+        elif status == "PUBLISH":
+            p = Product.objects.get(id=id)
+            p.status = "DRAFT"
+            p.save()
+            return redirect('vendor')
+        elif status == "DELETE":
+            p = Product.objects.get(id=id)
+            p.delete()
+            return redirect('vendor')
+    else:
+        return redirect('home')
 
 def ADDPRODUCT(request):
     category = Category.objects.all().order_by('id')[:10]
@@ -158,3 +185,22 @@ def FILLTER_DATA(request):
 
     return JsonResponse({'data': t})
     
+def REVIEW(request,slug):
+    product = Product.objects.filter(slug=slug)
+    title = request.POST.get("title")
+    cmt = request.POST.get("review")
+    rate = request.POST.get("rate")
+
+    if product.exists():
+        user = request.user
+        review = Review(
+            user=user,
+            product=product.first(),
+            title=title,
+            content=cmt,
+            rate=rate,
+        )
+        review.save()
+        return redirect('home')
+    else:
+        return redirect('home')

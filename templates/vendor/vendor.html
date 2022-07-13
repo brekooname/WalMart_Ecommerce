@@ -169,6 +169,7 @@
                                             <th scope="col">Discount</th>
                                             <th scope="col">Stock</th>
                                             <th scope="col">Status</th>
+                                            <th scope="col">Delete</th>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -182,15 +183,22 @@
                                                     <td>{{p.stock}}</td>
                                                     {% if p.status == "PUBLISH" %}
                                                         <td>
-                                                            {{p.status}}
+                                                            <a href="/vendor/publish/{{p.status}}/{{p.id}}" type="submit" class="btn btn-success btn-sm">
+                                                                {{p.status}}
+                                                            </a>
                                                         </td>
                                                     {% else %}
                                                         <td>
-                                                            <button type="submit" class="btn btn-danger">
+                                                            <a href="/vendor/publish/{{p.status}}/{{p.id}}" type="submit" class="btn btn-danger ">
                                                                 {{p.status}}
-                                                            </button>
+                                                            </a>
                                                         </td>
                                                     {% endif %}
+                                                    <td>
+                                                        <a href="/vendor/publish/DELETE/{{p.id}}" type="submit" class="btn btn-danger ">
+                                                            DELETE
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             {% endfor %}
                                         </tbody>
