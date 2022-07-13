@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from app.models import *
 from django.core.files.storage import FileSystemStorage
+from django.template.loader import render_to_string
 
 def BASE(request):
     
@@ -10,7 +11,7 @@ def BASE(request):
 
 def HOME(request):
     category = Category.objects.all().order_by('id')[:10]
-    product = Product.objects.filter(status="PUBLISH").order_by('id')[:8]
+    product = Product.objects.filter(status="PUBLISH").order_by('-id')[:8]
     vendor = Vendor.objects.all()
     data = {
         'vendor':vendor,
@@ -128,4 +129,32 @@ def DETAIL_PRODUCT(request,cat,scat,slug):
     else:
         return redirect('home')
 
+def FILLTER_DATA(request):
+
+    product = request.GET.get('product')
+    price = request.GET.get('price')
+
+    if price:
+        p = price.split(",")
+        # print(p[0])
+        product = Product.objects.filter(status="PUBLISH",price__gte=p[0],price__lte=p[1]).order_by('-id')[0:8]
+
+    elif product:
+        c = product.split("-")[0]
+        id = product.split("-")[1]
+        if c == "maincategory":
+            product = Product.objects.filter(status="PUBLISH",maincategory__id__in=id).order_by('-id')[0:8]
+        if c == "subcategory":
+            product = Product.objects.filter(status="PUBLISH",subcategory__id__in=id).order_by('-id')[0:8]
+        if c == "all":
+            product = Product.objects.filter(status="PUBLISH").order_by('-id')
+    else:
+        product = Product.objects.filter(status="PUBLISH").order_by('-id')
+
+    data  = {
+        'product':product
+    }
+    t = render_to_string('ajax/product.html',data)
+
+    return JsonResponse({'data': t})
     

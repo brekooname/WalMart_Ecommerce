@@ -1,7 +1,7 @@
 from django import template
 import math
 
-from app.models import SubCategory, Vendor
+from app.models import Product, SubCategory, Vendor
 register = template.Library()
 
 @register.simple_tag
@@ -45,4 +45,20 @@ def check_vendor(user):
         return True
     else:
         return False
+
+@register.simple_tag
+def product_label(discount):
+
+    if int(discount) >= 30:
+        return "hot"
+    elif int(discount) >= 20:
+        return "sale"
+    else:
+        return "new"
+@register.simple_tag
+def hot_deal_product():
+
+    p = Product.objects.filter(status="PUBLISH",discount__gte=30).order_by('-id')[:4]
+
+    return p
 

@@ -26,221 +26,63 @@
   
     
     
-    	<!-- ============================================== HOT DEALS ============================================== -->
-<div class="sidebar-widget hot-deals wow fadeInUp outer-top-vs">
+<!-- ============================================== HOT DEALS ============================================== -->
+<div class="sidebar-widget hot-deals wow fadeInUp outer-bottom-xs">
 	<h3 class="section-title">hot deals</h3>
-	<div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-xs">
-		
-														<div class="item">
-					<div class="products">
-						<div class="hot-deal-wrapper">
-							<div class="image">
-								<img src="/static/assets/images/hot-deals/p5.jpg" alt="">
-							</div>
-							<div class="sale-offer-tag"><span>35%<br>off</span></div>
-							<div class="timing-wrapper">
-								<div class="box-wrapper">
-									<div class="date box">
-										<span class="key">120</span>
-										<span class="value">Days</span>
-									</div>
-								</div>
-				                
-				                <div class="box-wrapper">
-									<div class="hour box">
-										<span class="key">20</span>
-										<span class="value">HRS</span>
-									</div>
-								</div>
+	<div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
+	  {% hot_deal_product as hot_deal %}
+	  {% for p in hot_deal %}
+		<div class="item">
+		  <div class="products">
+			<div class="hot-deal-wrapper">
+			  <div class="image"> <img src="/media/{% product_img_src p.image1 %}" alt=""> </div>
+			  <div class="sale-offer-tag"><span>{{p.discount}}%<br>
+				off</span></div>
+			  <div class="timing-wrapper">
+				<div class="box-wrapper">
+				  <div class="date box"> <span class="key">120</span> <span class="value">DAYS</span> </div>
+				</div>
+				<div class="box-wrapper">
+				  <div class="hour box"> <span class="key">20</span> <span class="value">HRS</span> </div>
+				</div>
+				<div class="box-wrapper">
+				  <div class="minutes box"> <span class="key">36</span> <span class="value">MINS</span> </div>
+				</div>
+				<div class="box-wrapper hidden-md">
+				  <div class="seconds box"> <span class="key">60</span> <span class="value">SEC</span> </div>
+				</div>
+			  </div>
+			</div>
+			<!-- /.hot-deal-wrapper -->
+			
+			<div class="product-info text-left m-t-20">
+			  <h3 class="name"><a href="/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}">{{p.title}}</a></h3>
+			  <div class="rating rateit-small"></div>
+			  <div class="product-price"> <span class="price"> Rs. {% discount_price p.price p.discount %} </span> <span class="price-before-discount">Rs. {{p.price}} </span> </div>
+			  <!-- /.product-price --> 
+			  
+			</div>
+			<!-- /.product-info -->
+			
+			<div class="cart clearfix animate-effect">
+			  <div class="action">
+				<div class="add-cart-button btn-group">
+				  <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+				  <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+				</div>
+			  </div>
+			  <!-- /.action --> 
+			</div>
+			<!-- /.cart --> 
+		  </div>
+		</div>
+	  {% endfor %}
 
-				                <div class="box-wrapper">
-									<div class="minutes box">
-										<span class="key">36</span>
-										<span class="value">MINS</span>
-									</div>
-								</div>
-
-				                <div class="box-wrapper hidden-md">
-									<div class="seconds box">
-										<span class="key">60</span>
-										<span class="value">SEC</span>
-									</div>
-								</div>
-							</div>
-						</div><!-- /.hot-deal-wrapper -->
-
-						<div class="product-info text-left m-t-20">
-							<h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
-							<div class="rating rateit-small"></div>
-
-							<div class="product-price">	
-								<span class="price">
-									$600.00
-								</span>
-									
-							    <span class="price-before-discount">$800.00</span>					
-							
-							</div><!-- /.product-price -->
-							
-						</div><!-- /.product-info -->
-
-						<div class="cart clearfix animate-effect">
-							<div class="action">
-								
-								<div class="add-cart-button btn-group">
-									<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-										<i class="fa fa-shopping-cart"></i>													
-									</button>
-									<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-															
-								</div>
-								
-							</div><!-- /.action -->
-						</div><!-- /.cart -->
-					</div>	
-					</div>		        
-													<div class="item">
-					<div class="products">
-						<div class="hot-deal-wrapper">
-							<div class="image">
-								<img src="/static/assets/images/products/p6.jpg" alt="">
-							</div>
-							<div class="sale-offer-tag"><span>35%<br>off</span></div>
-							<div class="timing-wrapper">
-								<div class="box-wrapper">
-									<div class="date box">
-										<span class="key">120</span>
-										<span class="value">Days</span>
-									</div>
-								</div>
-				                
-				                <div class="box-wrapper">
-									<div class="hour box">
-										<span class="key">20</span>
-										<span class="value">HRS</span>
-									</div>
-								</div>
-
-				                <div class="box-wrapper">
-									<div class="minutes box">
-										<span class="key">36</span>
-										<span class="value">MINS</span>
-									</div>
-								</div>
-
-				                <div class="box-wrapper hidden-md">
-									<div class="seconds box">
-										<span class="key">60</span>
-										<span class="value">SEC</span>
-									</div>
-								</div>
-							</div>
-						</div><!-- /.hot-deal-wrapper -->
-
-						<div class="product-info text-left m-t-20">
-							<h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
-							<div class="rating rateit-small"></div>
-
-							<div class="product-price">	
-								<span class="price">
-									$600.00
-								</span>
-									
-							    <span class="price-before-discount">$800.00</span>					
-							
-							</div><!-- /.product-price -->
-							
-						</div><!-- /.product-info -->
-
-						<div class="cart clearfix animate-effect">
-							<div class="action">
-								
-								<div class="add-cart-button btn-group">
-									<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-										<i class="fa fa-shopping-cart"></i>													
-									</button>
-									<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-															
-								</div>
-								
-							</div><!-- /.action -->
-						</div><!-- /.cart -->
-					</div>	
-					</div>		        
-													<div class="item">
-					<div class="products">
-						<div class="hot-deal-wrapper">
-							<div class="image">
-								<img src="/static/assets/images/products/p7.jpg" alt="">
-							</div>
-							<div class="sale-offer-tag"><span>35%<br>off</span></div>
-							<div class="timing-wrapper">
-								<div class="box-wrapper">
-									<div class="date box">
-										<span class="key">120</span>
-										<span class="value">Days</span>
-									</div>
-								</div>
-				                
-				                <div class="box-wrapper">
-									<div class="hour box">
-										<span class="key">20</span>
-										<span class="value">HRS</span>
-									</div>
-								</div>
-
-				                <div class="box-wrapper">
-									<div class="minutes box">
-										<span class="key">36</span>
-										<span class="value">MINS</span>
-									</div>
-								</div>
-
-				                <div class="box-wrapper hidden-md">
-									<div class="seconds box">
-										<span class="key">60</span>
-										<span class="value">SEC</span>
-									</div>
-								</div>
-							</div>
-						</div><!-- /.hot-deal-wrapper -->
-
-						<div class="product-info text-left m-t-20">
-							<h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
-							<div class="rating rateit-small"></div>
-
-							<div class="product-price">	
-								<span class="price">
-									$600.00
-								</span>
-									
-							    <span class="price-before-discount">$800.00</span>					
-							
-							</div><!-- /.product-price -->
-							
-						</div><!-- /.product-info -->
-
-						<div class="cart clearfix animate-effect">
-							<div class="action">
-								
-								<div class="add-cart-button btn-group">
-									<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-										<i class="fa fa-shopping-cart"></i>													
-									</button>
-									<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-															
-								</div>
-								
-							</div><!-- /.action -->
-						</div><!-- /.cart -->
-					</div>	
-					</div>		        
-						
-	    
-    </div><!-- /.sidebar-widget -->
-</div>
-<!-- ============================================== HOT DEALS: END ============================================== -->					
-
+	</div>
+	<!-- /.sidebar-widget --> 
+  </div>
+  <!-- ============================================== HOT DEALS: END ============================================== --> 
+  
 <!-- ============================================== NEWSLETTER ============================================== -->
 <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small outer-top-vs">
 	<h3 class="section-title">Newsletters</h3>
@@ -477,53 +319,36 @@
 										
 										<div class="product-add-review">
 											<h4 class="title">Write your own review</h4>
-											<div class="review-table">
-												<div class="table-responsive">
-													<table class="table">	
-														<thead>
-															<tr>
-																<th class="cell-label">&nbsp;</th>
-																<th>1 star</th>
-																<th>2 stars</th>
-																<th>3 stars</th>
-																<th>4 stars</th>
-																<th>5 stars</th>
-															</tr>
-														</thead>	
-														<tbody>
-															<tr>
-																<td class="cell-label">Quality</td>
-																<td><input type="radio" name="quality" class="radio" value="1"></td>
-																<td><input type="radio" name="quality" class="radio" value="2"></td>
-																<td><input type="radio" name="quality" class="radio" value="3"></td>
-																<td><input type="radio" name="quality" class="radio" value="4"></td>
-																<td><input type="radio" name="quality" class="radio" value="5"></td>
-															</tr>
-															<tr>
-																<td class="cell-label">Price</td>
-																<td><input type="radio" name="quality" class="radio" value="1"></td>
-																<td><input type="radio" name="quality" class="radio" value="2"></td>
-																<td><input type="radio" name="quality" class="radio" value="3"></td>
-																<td><input type="radio" name="quality" class="radio" value="4"></td>
-																<td><input type="radio" name="quality" class="radio" value="5"></td>
-															</tr>
-															<tr>
-																<td class="cell-label">Value</td>
-																<td><input type="radio" name="quality" class="radio" value="1"></td>
-																<td><input type="radio" name="quality" class="radio" value="2"></td>
-																<td><input type="radio" name="quality" class="radio" value="3"></td>
-																<td><input type="radio" name="quality" class="radio" value="4"></td>
-																<td><input type="radio" name="quality" class="radio" value="5"></td>
-															</tr>
-														</tbody>
-													</table><!-- /.table .table-bordered -->
-												</div><!-- /.table-responsive -->
-											</div><!-- /.review-table -->
+											<div class="form-container">
+												<form role="form" class="cnt-form">
+													<div class="review-table">
+														<div class="table-responsive">
+															<table class="table">	
+																<thead>
+																	<tr>
+																		<th class="cell-label">&nbsp;</th>
+																		<th>1 star</th>
+																		<th>2 stars</th>
+																		<th>3 stars</th>
+																		<th>4 stars</th>
+																		<th>5 stars</th>
+																	</tr>
+																</thead>	
+																<tbody>
+																	<tr>
+																		<td class="cell-label">Rating</td>
+																		<td><input type="radio" name="rate" class="radio" value="1"></td>
+																		<td><input type="radio" name="rate" class="radio" value="2"></td>
+																		<td><input type="radio" name="rate" class="radio" value="3"></td>
+																		<td><input type="radio" name="rate" class="radio" value="4"></td>
+																		<td><input type="radio" name="rate" class="radio" value="5"></td>
+																	</tr>
+																</tbody>
+															</table><!-- /.table .table-bordered -->
+														</div><!-- /.table-responsive -->
+													</div><!-- /.review-table -->
 											
-											<div class="review-form">
-												<div class="form-container">
-													<form role="form" class="cnt-form">
-														
+													<div class="review-form">
 														<div class="row">
 															<div class="col-sm-6">
 																<div class="form-group">
@@ -543,15 +368,15 @@
 																</div><!-- /.form-group -->
 															</div>
 														</div><!-- /.row -->
-														
+																
 														<div class="action text-right">
 															<button class="btn btn-primary btn-upper">SUBMIT REVIEW</button>
 														</div><!-- /.action -->
 
-													</form><!-- /.cnt-form -->
-												</div><!-- /.form-container -->
-											</div><!-- /.review-form -->
-
+													</div><!-- /.review-form -->
+													
+												</form><!-- /.cnt-form -->
+											</div><!-- /.form-container -->
 										</div><!-- /.product-add-review -->										
 										
 							        </div><!-- /.product-tab -->
@@ -602,8 +427,9 @@
                         <div class="product-image">
                             <div class="image">
                                 <a href="/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}"><img  src="/media/{% product_img_src p.image1 %}" alt=""></a>
-                            </div><!-- /.image -->			
-                            <div class="tag sale"><span>sale</span></div>            		   
+                            </div><!-- /.image -->		
+								
+                            <div class="tag {% product_label p.discount %}"><span>{% product_label p.discount %}</span></div>            		   
                         </div><!-- /.product-image -->
                             
                         <div class="product-info text-left">

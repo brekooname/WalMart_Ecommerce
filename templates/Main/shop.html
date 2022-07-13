@@ -2,6 +2,51 @@
 {% block title %}Shop{% endblock title %}
 {% block content %}
 {% load product_tags %}
+<script>
+	$(document).ready(function(){
+
+		$(".filter-checkbox").on('click', function(){
+            //alert("$(this).text()");
+            //$(".filter-checkbox").removeClass("active");
+            //$(this).addClass("active");
+
+			var filter_object={
+                'product':$(this).data('filter')
+            };
+            console.log(filter_object);
+
+			$.ajax({
+				url:'{% url "fillter_data" %}',
+				data:filter_object,
+				dataType:'json',
+				success:function(res){
+					console.log(res)
+					$("#filteredCourse").html(res.data);
+				}
+			});
+		});
+    
+		$(".price-filter").on('click', function(){
+            //alert("$(this).text()");
+            //$(".filter-checkbox").removeClass("active");
+            //$(this).addClass("active");
+			var filter_object={
+                'price':$(".price-slider").val()
+            };
+            console.log(filter_object);
+
+			$.ajax({
+				url:'{% url "fillter_data" %}',
+				data:filter_object,
+				dataType:'json',
+				success:function(res){
+					console.log(res)
+					$("#filteredCourse").html(res.data);
+				}
+			});
+		});
+	});
+	</script>
 
 <div class="breadcrumb">
     <div class="container">
@@ -89,25 +134,27 @@
                 </div>
                 <div class="sidebar-widget-body">
                   <div class="accordion">
-                    {% for c in category %}
                     
-                        <div class="accordion-group">
-                            <div class="accordion-heading"> <a href="#category-{{c.id}}" data-toggle="collapse" class="accordion-toggle collapsed"> {{c.title}} </a> </div>
+                    <div class="accordion-group">
+                      <div class="accordion-heading"> <a  class="filter-checkbox" id="all" data-filter="all-1" style="cursor: pointer;"> All </a> </div>
+                            
+                        {% for c in category %}
+                            <div class="accordion-heading"> <a href="#category-{{c.id}}" data-toggle="collapse" class="accordion-toggle collapsed filter-checkbox" id="{{c.id}}" data-filter="maincategory-{{c.id}}" style="cursor: pointer;"> {{c.title}} </a> </div>
                             <!-- /.accordion-heading -->
                             <div class="accordion-body collapse" id="category-{{c.id}}" style="height: 0px;">
                                 <div class="accordion-inner">
                                 <ul>
                                     {% for sc in c.subcategory_set.all %}
-                                        <li><a href="#">{{sc.title}}</a></li>
+                                        <li><a class="filter-checkbox" id="{{sc.id}}" data-filter="subcategory-{{sc.id}}" style="cursor: pointer;">{{sc.title}}</a></li>
                                     {% endfor %}
                                 </ul>
                                 </div>
                                 <!-- /.accordion-inner --> 
                             </div>
                         <!-- /.accordion-body --> 
-                        </div>
+                        {% endfor %}
+                    </div>
                         <!-- /.accordion-group -->
-                    {% endfor %}
                   </div>
                   <!-- /.accordion --> 
                 </div>
@@ -122,12 +169,12 @@
                   <h4 class="widget-title">Price Slider</h4>
                 </div>
                 <div class="sidebar-widget-body m-t-10">
-                  <div class="price-range-holder"> <span class="min-max"> <span class="pull-left">$200.00</span> <span class="pull-right">$800.00</span> </span>
+                  <div class="price-range-holder"> <span class="min-max"> <span class="pull-left">Rs. 100</span> <span class="pull-right">Rs. 1000</span> </span>
                     <input type="text" id="amount" style="border:0; color:#666666; font-weight:bold;text-align:center;">
                     <input type="text" class="price-slider" value="" >
                   </div>
                   <!-- /.price-range-holder --> 
-                  <a href="#" class="lnk btn btn-primary">Show Now</a> </div>
+                  <button class="price-filter lnk btn btn-primary">Show Now</button> </div>
                 <!-- /.sidebar-widget-body --> 
               </div>
               <!-- /.sidebar-widget --> 
@@ -326,7 +373,7 @@
             </div>
             <!-- /.row --> 
           </div>
-          <div class="search-result-container ">
+          <div class="search-result-container " id="filteredCourse">
             <div id="myTabContent" class="tab-content category-list">
               <div class="tab-pane active " id="grid-container">
                 <div class="category-product">
@@ -339,7 +386,7 @@
                                 <div class="image"> <a href="/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}"><img  src="/media/{% product_img_src p.image1 %}" alt=""></a> </div>
                                 <!-- /.image -->
                                 
-                                <div class="tag new"><span>new</span></div>
+                                <div class="tag {% product_label p.discount %}"><span>{% product_label p.discount %}</span></div>
                             </div>
                             <!-- /.product-image -->
                             
@@ -428,7 +475,7 @@
                                 <!-- /.col --> 
                             </div>
                             <!-- /.product-list-row -->
-                            <div class="tag new"><span>new</span></div>
+                            <div class="tag {% product_label p.discount %}"><span>{% product_label p.discount %}</span></div>
                             </div>
                             <!-- /.product-list --> 
                         </div>

@@ -36,5 +36,6 @@ urlpatterns = [
     path('vendor/',views.VENDOR,name='vendor'),
     path('vendor/add-product/',views.ADDPRODUCT,name='add-product'),
     path('product/<cat>/<scat>/<slug>',views.DETAIL_PRODUCT,name='detail_product'),
+    path('course/fillter-data', views.FILLTER_DATA,name='fillter_data'),
     
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
