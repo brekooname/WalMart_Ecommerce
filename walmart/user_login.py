@@ -83,3 +83,38 @@ def PROFILEUPDATE(request):
         return redirect('profile')
     
     return None
+
+def WISHLIST(request):
+    wishlist = Wishlist.objects.filter(user=request.user).order_by('-id')
+    vendor = Vendor.objects.all()
+    data = {
+        'vendor':vendor,
+        'wishlist':wishlist,
+    }
+    return render(request,'Main/wishlist.html',data)
+
+def ADDWISHLIST(request,slug):
+
+    product = Product.objects.filter(slug=slug)
+    if product.exists():
+        check = Wishlist.objects.filter(user=request.user,product=product.first())
+        if check.exists():
+            return redirect('wishlist')
+        else:
+            wishlist = Wishlist(
+                user=request.user,
+                product=product.first(),
+            )
+            wishlist.save()
+            return redirect('wishlist')
+    else:
+        return redirect('home')
+
+def REMOVEWISHLIST(request,slug):
+    product = Product.objects.filter(slug=slug)
+    if product.exists():
+        wishlist = Wishlist.objects.filter(user=request.user,product=product.first())
+        wishlist.delete()
+        return redirect('wishlist')
+    else:
+        return redirect('home')
