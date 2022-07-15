@@ -94,4 +94,33 @@ class Cart(models.Model):
     def __str__(self):
         return self.user.username+" - "+self.product.title
 
-     
+
+class State(models.Model):
+    name = models.CharField(null=True,max_length=200)
+    def __str__(self):
+        return self.name
+
+class District(models.Model):
+    state = models.ForeignKey(State,on_delete=models.CASCADE,null=True)
+    name = models.CharField(null=True,max_length=200)
+    def __str__(self):
+        return self.name
+
+class SubDistrict(models.Model):
+    district = models.ForeignKey(District,on_delete=models.CASCADE,null=True)
+    name = models.CharField(null=True,max_length=200)
+    pin = models.IntegerField(null=True)
+    def __str__(self):
+        return  self.district.name +"-"+ self.name
+
+class Address(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    street = models.CharField(null=True,max_length=200)
+    pin = models.IntegerField(null=True)
+    subdistrict = models.ForeignKey(SubDistrict,on_delete=models.CASCADE,null=True)
+    district = models.ForeignKey(District,on_delete=models.CASCADE,null=True)
+    state = models.ForeignKey(State,on_delete=models.CASCADE,null=True)
+    def __str__(self):
+        return self.user.username
+
+  

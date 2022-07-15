@@ -1,7 +1,7 @@
 from django import template
 import math
 from django.db.models import Sum
-from app.models import Product, SubCategory, Vendor
+from app.models import Product, SubCategory, SubDistrict, Vendor
 register = template.Library()
 
 @register.simple_tag

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Profile{% endblock title %}
 {% block content %}
+{% load product_tags %}
         <!-- Start of Main -->
         <main class="main" style="background-color: white;">
             <!-- Start of Page Header -->
@@ -57,6 +58,62 @@
                         </div>
                         <div class="tab-pane fade" id="Address" role="tabpanel" aria-labelledby="Address-tab">
                             <div class="container-fluid" style="display: flex;justify-content: center; background-color: white; padding: 10px;">
+                                <div class="container-fluid col-md-8">
+                                    <h2>User Address</h2>
+                                    <form class="outer-top-xs" role="form" action=" {% url 'address' %} " method="post">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label class="info-title" for="street">Street Name <span>*</span></label>
+                                            <input type="text" value="{{add.street}}" name="street" class="form-control unicase-form-control text-input" id="street">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="info-title" for="pin">Pincode *</label>
+                                            <select class="unicase-form-control text-input form-control form-control-md mb-0" name="pin" id="pin">
+                                                <option value="{{add.pin}}" selected>{{add.pin}}</option>
+
+                                                {% for p in subd %}
+                                                    <option value="{{p.pin}}">{{p.pin}}</option>
+                                                {% endfor %}
+                                            </select>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="info-title" for="Subd">Sub District <span>*</span></label>
+                                            <select class="unicase-form-control text-input form-control form-control-md mb-0" name="subdistrict" id="Subd">
+                                                <option value="{{add.subdistrict.name}}" selected>{{add.subdistrict.name}}</option>
+                                                
+                                                {% for p in subd %}
+                                                    <option value="{{p.name}}">{{p.name}}</option>
+                                                {% endfor %}
+                                            </select>
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="info-title" for="district">District <span>*</span></label>
+                                            <select class="unicase-form-control text-input form-control form-control-md mb-0" name="district" id="district">
+                                                <option value="{{add.district}}" selected>{{add.district}}</option>
+                                                
+                                                {% for p in dis %}
+                                                    <option value="{{p.name}}">{{p.name}}</option>
+                                                {% endfor %}
+                                            </select>
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="info-title" for="state">State<span>*</span></label>
+                                            <select class="unicase-form-control text-input form-control form-control-md mb-0" name="state" id="state">
+                                                <option value="{{add.state}}" selected>{{add.state}}</option>
+                                                
+                                                {% for p in sts %}
+                                                    <option value="{{p.name}}">{{p.name}}</option>
+                                                {% endfor %}
+                                            </select>
+                                                                                        
+                                        </div>
+                                        
+                                        <button type="submit" class="btn-upper btn btn-primary">Update</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                       </div>

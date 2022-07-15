@@ -58,7 +58,16 @@ def LOGOUT(request):
 
 def PROFILE(request):
     vendor_check = Vendor.objects.all()
+    subd = SubDistrict.objects.all()
+    dis = District.objects.all()
+    sts = State.objects.all()
+    add = Address.objects.filter(user=request.user)
+
     data = {
+        'subd':subd,
+        'dis':dis,
+        'sts':sts,
+        'add':add.first(),
         'vendor':vendor_check,
     }
     
@@ -86,10 +95,8 @@ def PROFILEUPDATE(request):
 
 def WISHLIST(request):
     wishlist = Wishlist.objects.filter(user=request.user).order_by('-id')
-    cart = Cart.objects.filter(user=request.user).order_by('-id')
     vendor = Vendor.objects.all()
     data = {
-        'cart':cart,
         'vendor':vendor,
         'wishlist':wishlist,
     }
@@ -122,11 +129,11 @@ def REMOVEWISHLIST(request,slug):
         return redirect('home')
 
 def CART(request):
-    cart = Cart.objects.filter(user=request.user).order_by('-id')
+    # cart = Cart.objects.filter(user=request.user).order_by('-id')
     vendor = Vendor.objects.all()
     data = {
         'vendor':vendor,
-        'cart':cart,
+        # 'cart':cart,
     }
     return render(request,'Main/cart.html',data)
 
@@ -158,3 +165,39 @@ def REMOVECART(request,slug):
         return redirect('cart')
     else:
         return redirect('home')
+
+def ADDRESS(request):
+    if request.method == "POST":
+        user = request.user
+        street = request.POST.get('street')
+        pin = request.POST.get('pin')
+        sub = request.POST.get('subdistrict')
+        dis = request.POST.get('district')
+        sta = request.POST.get('state')
+
+        subdistrict= SubDistrict.objects.get(name=sub)
+        district= District.objects.get(name=dis)
+        state= State.objects.get(name=sta)
+
+        add = Address.objects.filter(user=request.user)
+
+        if add.exists():
+            add = Address.objects.get(user=request.user)
+            add.street=street
+            add.pin=pin
+            add.subdistrict=subdistrict
+            add.district=district
+            add.state=state
+            add.save()
+            return redirect('profile')
+        else:
+            ad = Address(
+                user=user,
+                street=street,
+                pin=pin,
+                subdistrict=subdistrict,
+                district=district,
+                state=state,
+            )
+            ad.save()
+            return redirect('profile')

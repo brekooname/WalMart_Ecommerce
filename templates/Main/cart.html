@@ -44,7 +44,7 @@
 				</tr>
 			</tfoot>
 			<tbody>
-                {% for p in cart %}
+                {% for p in user.cart_set.all reversed %}
                     <tr>
                         <td class="romove-item"><a href="/accounts/cart/remove/{{p.product.slug}}" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
                         <td class="cart-image">
@@ -167,10 +167,10 @@
 			<tr>
 				<th>
 					<div class="cart-sub-total">
-						Subtotal<span class="inner-left-md">Rs. {% cart_sub_total cart %} </span>
+						Subtotal<span class="inner-left-md">Rs. {% cart_sub_total user.cart_set.all %} </span>
 					</div>
 					<div class="cart-grand-total">
-						Grand Total<span class="inner-left-md">Rs. {% cart_sub_total cart %}</span>
+						Grand Total<span class="inner-left-md">Rs. {% cart_sub_total user.cart_set.all %}</span>
 					</div>
 				</th>
 			</tr>

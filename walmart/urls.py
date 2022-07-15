@@ -37,6 +37,7 @@ urlpatterns = [
     path('accounts/cart/add', user_login.ADDCART,name="add-cart"),
     path('accounts/cart/remove/<slug>', user_login.REMOVECART,name="remove-cart"),
     path('accounts/profile/update', user_login.PROFILEUPDATE,name="profileupdate"),
+    path('accounts/address', user_login.ADDRESS,name="address"),
     path('accounts/',include('django.contrib.auth.urls')),
     path('logout/',user_login.LOGOUT,name='logout'),
     path('vendor/',views.VENDOR,name='vendor'),
