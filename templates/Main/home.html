@@ -99,7 +99,7 @@
                     <!-- /.hot-deal-wrapper -->
                     
                     <div class="product-info text-left m-t-20">
-                      <h3 class="name"><a href="/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}">{{p.title}}</a></h3>
+                      <h3 class="name"><a href="{% if user.is_authenticated %}/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}{% endif %}">{{p.title}}</a></h3>
                       <div class="rating rateit-small"></div>
                       <div class="product-price"> <span class="price"> Rs. {% discount_price p.price p.discount %} </span> <span class="price-before-discount">Rs. {{p.price}} </span> </div>
                       <!-- /.product-price --> 
@@ -109,7 +109,7 @@
                     
                     <div class="cart clearfix animate-effect">
                       <div class="action">
-                        <form class="add-cart-button btn-group" method="get" action=" {% url 'add-cart' %} ">
+                        <form class="add-cart-button btn-group" method="get" action=" {% if user.is_authenticated %}{% url 'add-cart' %} {% endif %}">
                           <input type="text" name="slug" value="{{p.slug}}" hidden>
                           <input type="text" name="qty" value="1" hidden>
                           <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
@@ -856,7 +856,7 @@
                         <div class="products">
                           <div class="product">
                             <div class="product-image">
-                              <div class="image"> <a href="/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}"><img  src="/media/{% product_img_src p.image1 %}" alt=""></a> </div>
+                              <div class="image"> <a href="{% if user.is_authenticated %}/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}{% endif %}"><img  src="/media/{% product_img_src p.image1 %}" alt=""></a> </div>
                               <!-- /.image -->
                               
                               <div class="tag {% product_label p.discount %}"><span> {% product_label p.discount %} </span></div>
@@ -864,7 +864,7 @@
                             <!-- /.product-image -->
                             
                             <div class="product-info text-left">
-                              <h3 class="name"><a href="/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}">{{p.title}}</a></h3>
+                              <h3 class="name"><a href="{% if user.is_authenticated %}/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}{% endif %}">{{p.title}}</a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="description"></div>
                               <div class="product-price"> <span class="price"> Rs. {% discount_price p.price p.discount %} </span> <span class="price-before-discount">Rs. {{p.price}} </span> </div>
@@ -876,13 +876,13 @@
                               <div class="action">
                                 <ul class="list-unstyled">
                                   <li class="add-cart-button btn-group">
-                                    <form class="add-cart-button btn-group" method="get" action=" {% url 'add-cart' %} ">
+                                    <form class="add-cart-button btn-group" method="get" action="{% if user.is_authenticated %} {% url 'add-cart' %}{% endif %} ">
                                       <input type="text" name="slug" value="{{p.slug}}" hidden>
                                       <input type="text" name="qty" value="1" hidden>
                                       <button data-toggle="tooltip" class="btn btn-primary icon" type="submit" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
                                     </form>
                                   </li>
-                                  <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="/accounts/wishlist/add/{{p.slug}}" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                                  <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="{% if user.is_authenticated %}/accounts/wishlist/add/{{p.slug}}{% endif %}" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
                                   <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
                                 </ul>
                               </div>
@@ -913,7 +913,7 @@
                           <div class="products">
                             <div class="product">
                               <div class="product-image">
-                                <div class="image"> <a href="/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}"><img  src="/media/{% product_img_src p.image1 %}" alt=""></a> </div>
+                                <div class="image"> <a href="{% if user.is_authenticated %}/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}{% endif %}"><img  src="/media/{% product_img_src p.image1 %}" alt=""></a> </div>
                                 <!-- /.image -->
                                 
                                 <div class="tag {% product_label p.discount %}"><span> {% product_label p.discount %} </span></div>
@@ -921,7 +921,7 @@
                               <!-- /.product-image -->
                               
                               <div class="product-info text-left">
-                                <h3 class="name"><a href="/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}">{{p.title}}</a></h3>
+                                <h3 class="name"><a href="{% if user.is_authenticated %}/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}{% endif %}">{{p.title}}</a></h3>
                                 <div class="rating rateit-small"></div>
                                 <div class="description"></div>
                                 <div class="product-price"> <span class="price"> Rs. {% discount_price p.price p.discount %} </span> <span class="price-before-discount">Rs. {{p.price}} </span> </div>
@@ -933,14 +933,14 @@
                                 <div class="action">
                                   <ul class="list-unstyled">
                                     <li class="add-cart-button btn-group">
-                                      <form class="add-cart-button btn-group" method="get" action=" {% url 'add-cart' %} ">
+                                      <form class="add-cart-button btn-group" method="get" action=" {% if user.is_authenticated %}{% url 'add-cart' %} {% endif %}">
                                         <input type="text" name="slug" value="{{p.slug}}" hidden>
                                         <input type="text" name="qty" value="1" hidden>
                                         <button data-toggle="tooltip" class="btn btn-primary icon" type="submit" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
                                       </form>
                                       <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                     </li>
-                                    <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="/accounts/wishlist/add/{{p.slug}}" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                                    <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="{% if user.is_authenticated %}/accounts/wishlist/add/{{p.slug}}{% endif %}" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
                                     <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart"  title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
                                   </ul>
                                 </div>
@@ -1001,7 +1001,7 @@
                   <div class="products">
                       <div class="product">
                         <div class="product-image">
-                          <div class="image"> <a href="/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}"><img  src="/media/{% product_img_src p.image1 %}" alt=""></a> </div>
+                          <div class="image"> <a href="{% if user.is_authenticated %}/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}{% endif %}"><img  src="/media/{% product_img_src p.image1 %}" alt=""></a> </div>
                           <!-- /.image -->
                           
                           <div class="tag {% product_label p.discount %}"><span>{% product_label p.discount %}</span></div>
@@ -1009,7 +1009,7 @@
                         <!-- /.product-image -->
                         
                         <div class="product-info text-left">
-                          <h3 class="name"><a href="/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}">{{p.title}}</a></h3>
+                          <h3 class="name"><a href="{% if user.is_authenticated %}/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}{% endif %}">{{p.title}}</a></h3>
                           <div class="rating rateit-small"></div>
                           <div class="description"></div>
                           <div class="product-price"> <span class="price">Rs. {% discount_price p.price p.discount %} </span> <span class="price-before-discount">Rs. {{p.price}} </span> </div>
@@ -1021,14 +1021,14 @@
                           <div class="action">
                             <ul class="list-unstyled">
                               <li class="add-cart-button btn-group">
-                                <form class="add-cart-button btn-group" method="get" action=" {% url 'add-cart' %} ">
+                                <form class="add-cart-button btn-group" method="get" action="{% if user.is_authenticated %} {% url 'add-cart' %} {% endif %}">
                                   <input type="text" name="slug" value="{{p.slug}}" hidden>
                                   <input type="text" name="qty" value="1" hidden>
                                   <button data-toggle="tooltip" class="btn btn-primary icon" type="submit" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
                                 </form>
                                 <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                               </li>
-                              <li class="lnk wishlist"> <a class="add-to-cart" href="/accounts/wishlist/add/{{p.slug}}" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                              <li class="lnk wishlist"> <a class="add-to-cart" href="{% if user.is_authenticated %}/accounts/wishlist/add/{{p.slug}}{% endif %}" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
                               <li class="lnk"> <a class="add-to-cart"  title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
                             </ul>
                           </div>
@@ -1446,7 +1446,7 @@
                         <div class="products">
                           <div class="product">
                             <div class="product-image">
-                              <div class="image"> <a href="/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}"><img  src="/media/{% product_img_src p.image1 %}" alt=""></a> </div>
+                              <div class="image"> <a href="{% if user.is_authenticated %}/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}{% endif %}"><img  src="/media/{% product_img_src p.image1 %}" alt=""></a> </div>
                               <!-- /.image -->
                               
                               <div class="tag {% product_label p.discount %}"><span> {% product_label p.discount %} </span></div>
@@ -1454,7 +1454,7 @@
                             <!-- /.product-image -->
                             
                             <div class="product-info text-left">
-                              <h3 class="name"><a href="/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}">{{p.title}}</a></h3>
+                              <h3 class="name"><a href="{% if user.is_authenticated %}/product/{{p.maincategory}}/{{p.subcategory}}/{{p.slug}}{% endif %}">{{p.title}}</a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="description"></div>
                               <div class="product-price"> <span class="price"> Rs. {% discount_price p.price p.discount %} </span> <span class="price-before-discount">Rs. {{p.price}} </span> </div>
@@ -1466,13 +1466,13 @@
                               <div class="action">
                                 <ul class="list-unstyled">
                                   <li class="add-cart-button btn-group">
-                                    <form class="add-cart-button btn-group" method="get" action=" {% url 'add-cart' %} ">
+                                    <form class="add-cart-button btn-group" method="get" action="{% if user.is_authenticated %} {% url 'add-cart' %} {% endif %}">
                                       <input type="text" name="slug" value="{{p.slug}}" hidden>
                                       <input type="text" name="qty" value="1" hidden>
                                       <button data-toggle="tooltip" class="btn btn-primary icon" type="submit" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
                                     </form>
                                   </li>
-                                  <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="/accounts/wishlist/add/{{p.slug}}" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                                  <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="{% if user.is_authenticated %}/accounts/wishlist/add/{{p.slug}}{% endif %}" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
                                   <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
                                 </ul>
                               </div>
