@@ -69,7 +69,8 @@
                                 </div>
                             </div><!-- /.row -->
                             <div class="cart-product-info">
-                                                <span class="product-color">COLOR:<span>Blue</span></span>
+                                    <span class="product-color">COLOR:<span>{{p.color | capfirst}}</span></span>&nbsp;&nbsp;&nbsp;
+                                    <span class="product-size">SIZE:<span>{{p.size | capfirst}}</span></span>
                             </div>
                         </td>
                         <td class="cart-product-edit"><a href="#" class="product-edit">Edit</a></td>
@@ -179,7 +180,7 @@
 				<tr>
 					<td>
 						<div class="cart-checkout-btn pull-right">
-							<button type="submit" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</button>
+							<a href=" {% url 'checkout' %} " type="submit" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</a>
 							<span class="">Checkout with multiples address!</span>
 						</div>
 					</td>

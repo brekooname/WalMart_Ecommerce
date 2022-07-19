@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock title %}
+{% block content %}
+{% load product_tags %}
+
+{% if order is not None %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        var options = {
+            "key":"rzp_test_jTfXNi6r1KcPOU",
+            "name":"Walmart Ecommerce",
+            "amount":"{{order.amount}}",
+            "description":"Payment for Product",
+            "image":"https://ourlogo",
+            "order_id":"{{order.id}}",
+            "callback_url":"http://127.0.0.1:8000/verify_payment",
+            "profile":{
+                "name":"{{order.notes.name}}",
+                "email":"{{order.notes.email}}",
+            },
+            "theme":{
+                "color":"#3399cc"
+            }
+        };
+        var rsp1 = new Razorpay(options)
+        rsp1.open();
+    </script>
+
+{% endif %}
+<!-- ============================================== HEADER : END ============================================== -->
+<div class="breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-inner">
+			<ul class="list-inline list-unstyled">
+				<li><a href="#">Home</a></li>
+				<li class='active'>Checkout</li>
+			</ul>
+		</div><!-- /.breadcrumb-inner -->
+	</div><!-- /.container -->
+</div><!-- /.breadcrumb -->
+
+<div class="body-content">
+	<div class="container">
+		<div class="checkout-box ">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="panel-group checkout-steps" id="accordion">
+						<!-- checkout-step-01  -->
+                        <div class="panel panel-default checkout-step-01">
+
+                            <!-- panel-heading -->
+                            <div class="panel-heading">
+                                <h4 class="unicase-checkout-title">
+                                    <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseOne">
+                                    <span>1</span>Billing Information
+                                    </a>
+                                </h4>
+                            </div>
+                            <!-- panel-heading -->
+
+                            <div id="collapseOne" class="panel-collapse collapse in">
+
+                                <!-- panel-body  -->
+                                <div class="panel-body">
+                                    {% for c in cart reversed %}
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 ">
+                                                {{c.product.title}}
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 ">
+                                                x{{c.quantity}}
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 ">
+                                                {% discount_price c.product.price c.product.discount as disprice %}
+                                                Rs. {% cart_item_total disprice c.quantity %}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    <br>
+                                        <div class="row">
+                                            <div class="col-md-8 col-sm-8 ">
+                                                Total : 
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 ">
+                                                Rs. {% cart_sub_total cart %}
+                                            </div>
+                                        </div>		
+                                </div>
+                                <!-- panel-body  -->
+
+                            </div><!-- row -->
+                        </div>
+                        <!-- checkout-step-01  -->
+						<!-- checkout-step-02  -->
+                        <div class="panel panel-default checkout-step-02">
+
+                            <!-- panel-heading -->
+                            <div class="panel-heading">
+                                <h4 class="unicase-checkout-title">
+                                    <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseTwo">
+                                    <span>2</span>Shipping Address
+                                    </a>
+                                </h4>
+                            </div>
+                            <!-- panel-heading -->
+
+                            <div id="collapseTwo" class="panel-collapse collapse">
+
+                                <!-- panel-body  -->
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-2 col-sm-2">
+                                            {{add.street}}
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 ">
+                                            {{add.pin}}
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 ">
+                                            {{add.subdistrict.name}}
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 ">
+                                            {{add.district.name}}
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 ">
+                                            {{add.state.name}}
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 ">
+                                            <a href=" {% url 'profile' %} " class="btn-sm btn btn-primary" >EDIT</a>
+                                        </div>
+                                    </div>	
+                                </div>
+                                <!-- panel-body  -->
+
+                            </div><!-- row -->
+                        </div>
+                        <!-- checkout-step-02  -->
+						<!-- checkout-step-03  -->
+                        <div class="panel panel-default checkout-step-03">
+
+                            <!-- panel-heading -->
+                            <div class="panel-heading">
+                                <h4 class="unicase-checkout-title">
+                                    <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseThree">
+                                    <span>3</span>User Information
+                                    </a>
+                                </h4>
+                            </div>
+                            <!-- panel-heading -->
+
+                            <div id="collapseThree" class="panel-collapse collapse">
+
+                                <!-- panel-body  -->
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-3">
+                                            {{user.first_name}}
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 ">
+                                            {{user.last_name}}
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 ">
+                                            {{user.email}}
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 ">
+                                            <a href=" {% url 'profile' %} " class=" btn btn-sm btn-primary" >EDIT</a>
+                                        </div>
+                                    </div>	
+                                </div>
+                                <!-- panel-body  -->
+
+                            </div><!-- row -->
+                        </div>
+                        <!-- checkout-step-03  -->
+						<!-- checkout-step-04  -->
+                        <div class="panel panel-default checkout-step-04">
+
+                            <!-- panel-heading -->
+                            <div class="panel-heading">
+                                <h4 class="unicase-checkout-title">
+                                    <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseFour">
+                                    <span>4</span>Payment Method
+                                    </a>
+                                </h4>
+                            </div>
+                            <!-- panel-heading -->
+
+                            <div id="collapseFour" class="panel-collapse collapse">
+
+                                <!-- panel-body  -->
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <form class="col-md-12 col-sm-12 ">
+                                            
+                                            <a href="?action=create_payment" class="btn btn-sm btn-primary" >PAYNOW</a>
+                                        </form>
+                                    </div>	
+                                </div>
+                                <!-- panel-body  -->
+
+                            </div><!-- row -->
+                        </div>
+                        <!-- checkout-step-04  -->
+					</div><!-- /.checkout-steps -->
+				</div>
+<div class="col-md-4">
+					<!-- checkout-progress-sidebar -->
+<div class="checkout-progress-sidebar ">
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+		    	<h4 class="unicase-checkout-title">Your Checkout Progress</h4>
+		    </div>
+		    <div class="">
+				<ul class="nav nav-checkout-progress list-unstyled">
+					<li><a href="#collapseOne">Billing Information</a></li>
+					<li><a href="#collapseTwo">Shipping Address</a></li>
+					<li><a href="#collapseThree">User Information</a></li>
+					<li><a href="#collapseFour">Payment Method</a></li>
+				</ul>		
+			</div>
+		</div>
+	</div>
+</div> 
+<!-- checkout-progress-sidebar -->				
+        </div>
+	</div><!-- /.row -->
+</div><!-- /.checkout-box -->
+		<!-- ============================================== BRANDS CAROUSEL ============================================== -->
+<div id="brands-carousel" class="logo-slider wow fadeInUp">
+
+		<div class="logo-slider-inner">	
+			<div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
+				<div class="item m-t-15">
+					<a href="#" class="image">
+						<img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item m-t-10">
+					<a href="#" class="image">
+						<img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="assets/images/brands/brand3.png" src="assets/images/blank.gif" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="assets/images/brands/brand6.png" src="assets/images/blank.gif" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt="">
+					</a>	
+				</div><!--/.item-->
+		    </div><!-- /.owl-carousel #logo-slider -->
+		</div><!-- /.logo-slider-inner -->
+	
+</div><!-- /.logo-slider -->
+<!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
+</div><!-- /.body-content -->
+
+{% endblock content %}

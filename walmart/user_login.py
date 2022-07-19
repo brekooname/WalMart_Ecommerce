@@ -1,3 +1,4 @@
+import colorsys
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -62,11 +63,13 @@ def PROFILE(request):
     dis = District.objects.all()
     sts = State.objects.all()
     add = Address.objects.filter(user=request.user)
+    order = Order.objects.filter(user=request.user).order_by('-id')
 
     data = {
         'subd':subd,
         'dis':dis,
         'sts':sts,
+        'order':order,
         'add':add.first(),
         'vendor':vendor_check,
     }
@@ -140,6 +143,8 @@ def CART(request):
 def ADDCART(request):
     slug = request.GET.get('slug')
     qty = request.GET.get('qty')
+    size = request.GET.get('size')
+    color = request.GET.get('color')
 
     product = Product.objects.filter(slug=slug)
     if product.exists():
@@ -150,6 +155,8 @@ def ADDCART(request):
             cart = Cart(
                 user=request.user,
                 quantity=qty,
+                size=size,
+                color=color,
                 product=product.first(),
             )
             cart.save()

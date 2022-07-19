@@ -123,4 +123,26 @@ class Address(models.Model):
     def __str__(self):
         return self.user.username
 
+class Order(models.Model):
+    sts = (
+        ("PENDING","PENDING"),
+        ("CANCEL","CANCEL"),
+        ("SHIPPING","SHIPPING"),
+        ("SHIPED","SHIPED"),
+    )
+    order_id = models.CharField(max_length=100,null=True,blank=True)
+    payment_id = models.CharField(max_length=100,null=True,blank=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    vendor = models.ForeignKey(Vendor,on_delete=models.CASCADE,null=True)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
+    price = models.IntegerField(null=True,default=0)
+    quantity = models.IntegerField(null=True,blank=True)
+    color = models.CharField(null=True,max_length=200,blank=True)
+    size = models.CharField(null=True,max_length=200,blank=True)
+    orderdate = models.DateTimeField(auto_now_add=True)
+    shipdate = models.DateField()
+    status = models.CharField(choices=sts,max_length=200,null=True,blank=True)
+
+    def __str__(self):
+        return self.vendor.shop_name + " - " + self.user.username + " - " + self.product.title
   

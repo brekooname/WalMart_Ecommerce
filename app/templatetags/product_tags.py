@@ -86,3 +86,15 @@ def cart_sub_total(cart):
         subtotal += total
 
     return subtotal
+
+@register.simple_tag
+def order_special_product(product):
+    product = product
+    pr = []
+    for p in product:
+        pr.append(p)
+        print(p.title+"-"+str(p.avg))
+    sortedlist = sorted(pr,key=lambda x: x.avg,reverse=True)
+    print(sortedlist)
+    print(pr)
+    return sortedlist

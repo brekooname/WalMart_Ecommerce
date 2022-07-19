@@ -22,6 +22,9 @@
                         <li class="nav-item">
                           <a class="nav-link" id="Address-tab" data-toggle="tab" href="#Address" role="tab" aria-controls="Address" aria-selected="false">Address</a>
                         </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="Order-tab" data-toggle="tab" href="#Order" role="tab" aria-controls="Order" aria-selected="false">Order's</a>
+                        </li>
                       </ul>
                       <div class="tab-content" id="myTabContent">
                         <div class="tab-pane active" id="Account" role="tabpanel" aria-labelledby="Account-tab">
@@ -116,6 +119,63 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane fade" id="Order" role="tabpanel" aria-labelledby="Order-tab">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Order Id</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Color</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Control</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {% for p in order %}
+                                        <tr>
+                                            <th scope="row">{{forloop.counter}}</th>
+                                            <td>{{p.order_id}}</td>
+                                            <td>{{p.product.title}}</td>
+                                            <td>{{p.product.price}}</td>
+                                            <td>{{p.quantity}}</td>
+                                            <td>{{p.color}}</td>
+                                            <td>{{p.size}}</td>
+                                            <td><span class="badge badge-primary" >{{p.status}}</span></td>
+                                            {% if p.status == "SHIPED" %}
+                                                <td>
+                                                    <span class="badge badge-primary" >OK</span>
+                                                </td>
+                                            {% elif p.status == "PENDING" %}
+                                                <td>
+                                                    <span class="badge badge-primary" >WAIT</span>
+                                                </td>
+                                            {% elif p.status == "REJECT" %}
+                                                <td>
+                                                    <span class="badge badge-primary" >REJECT</span>
+                                                </td>
+                                            {% elif p.status == "CANCEL" %}
+                                                <td>
+                                                    <a href="/vendor/order/DELETE/{{p.id}}" type="submit" class="btn btn-success ">
+                                                        DELETE
+                                                    </a>
+                                                </td>
+                                            {% else %}
+                                                <td>
+                                                    <a href="/vendor/order/SHIPED/{{p.id}}" type="submit" class="btn btn-success ">
+                                                        RECEIVED
+                                                    </a>
+                                                </td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    
                       </div>
                 </div>
             </div>

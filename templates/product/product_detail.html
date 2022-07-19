@@ -252,6 +252,25 @@
 
 							<div class="quantity-container info-container">
 								<form class="row" method="get" action=" {% url 'add-cart' %} ">
+									{% product_size product.size as size %}
+									{% product_color product.color as color %}
+									
+									<div class="col-sm-12">
+										<span class="label">Size :</span>
+										{% for s in size %}
+											<label for="{{s}}">{{s}}</label>
+											<input type="radio" name="size" id="{{s}}" value="{{s}}">
+										{% endfor %}
+									</div>
+									
+									<div class="col-sm-12">
+										<span class="label">Color :</span>
+										{% for c in color %}
+											<label for="{{c}}">{{c | capfirst}}</label>
+											<input type="radio" name="color" id="{{c}}" value="{{c}}">
+										{% endfor %}
+									</div>
+
 									
 									<div class="col-sm-2">
 										<span class="label">Qty :</span>
@@ -266,7 +285,7 @@
 							            </div>
 									</div>
 
-									<div class="col-sm-7">
+									<div class="col-sm-6">
 										<button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
 									</div>
 
@@ -312,7 +331,7 @@
 											<h4 class="title">Customer Reviews</h4>
 
 											<div class="reviews">
-												{% for r in product.review_set.all|slice:":5" reversed %}
+												{% for r in product.review_set.all reversed %}
 													<div class="review">
 														<div class="review-title">
 															<span class="summary">{{r.title}}</span>
