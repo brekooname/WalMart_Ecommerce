@@ -104,7 +104,7 @@
                             <div class="image"> <a href="/product/{{p.product.maincategory}}/{{p.product.subcategory}}/{{p.product.slug}}"><img src="/media/{% product_img_src p.product.image1 %}" alt=""></a> </div>
                           </div>
                           <div class="col-xs-7">
-                            <h3 class="name"><a href="index8a95.html?page-detail">{{p.product.title | slice:":8"}}...</a></h3>
+                            <h3 class="name"><a href="{% if user.is_authenticated %}/product/{{p.product.maincategory}}/{{p.product.subcategory}}/{{p.product.slug}}{% endif %}">{{p.product.title | slice:":8"}}...</a></h3>
                             <div class="price">Rs. {% discount_price p.product.price p.product.discount %}</div>
                           </div>
                           <div class="col-xs-1 action"> <a href="/accounts/cart/remove/{{p.product.slug}}"><i class="fa fa-trash"></i></a> </div>

@@ -35,16 +35,6 @@ def product_img_src(src):
         return str(src)[7:]
     else:
         return src
-    
-@register.simple_tag
-def check_vendor(user):
-
-    vendor_check = Vendor.objects.filter(user=user)
-
-    if vendor_check.exists():
-        return True
-    else:
-        return False
 
 @register.simple_tag
 def product_label(discount):
@@ -72,6 +62,21 @@ def product_star_avg(review):
         return avg
 
 @register.simple_tag
+def product_review(product):
+    review = Review.objects.filter(product=product).order_by('-date')[:4]
+    return review
+
+@register.simple_tag
+def check_vendor(user):
+
+    vendor_check = Vendor.objects.filter(user=user)
+
+    if vendor_check.exists():
+        return True
+    else:
+        return False
+
+@register.simple_tag
 def cart_item_total(disprice,qty):
     return disprice * qty
 
@@ -93,10 +98,10 @@ def order_special_product(product):
     pr = []
     for p in product:
         pr.append(p)
-        print(p.title+"-"+str(p.avg))
+        # print(p.title+"-"+str(p.avg))
     sortedlist = sorted(pr,key=lambda x: x.avg,reverse=True)
-    print(sortedlist)
-    print(pr)
+    # print(sortedlist)
+    # print(pr)
     return sortedlist
 
 @register.simple_tag

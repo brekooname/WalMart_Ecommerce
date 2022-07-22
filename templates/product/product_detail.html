@@ -331,7 +331,8 @@
 											<h4 class="title">Customer Reviews</h4>
 
 											<div class="reviews">
-												{% for r in product.review_set.all reversed %}
+												{% product_review product as review %}
+												{% for r in review %}
 													<div class="review">
 														<div class="review-title">
 															<span class="summary">{{r.title}}</span>
