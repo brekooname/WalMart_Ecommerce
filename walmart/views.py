@@ -16,6 +16,9 @@ from time import time
 from django.db.models import *
 from django.views.decorators.csrf import csrf_exempt
 
+from io import BytesIO
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 def BASE(request):
     
@@ -195,6 +198,24 @@ def ADDPRODUCT(request):
         'category':category,
     }
     return render(request,"vendor/add-product.html",data)
+
+
+def render_to_pdf(template_src, context_dict={}):
+	template = get_template(template_src)
+	html  = template.render(context_dict)
+	result = BytesIO()
+	pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+	if not pdf.err:
+		return HttpResponse(result.getvalue(), content_type='application/pdf')
+	return None
+
+def BILL(request,id):
+    order = Order.objects.filter(id=id)
+    data = {
+        'order':order.first(),
+    }
+    pdf = render_to_pdf('vendor/bill.html',data)
+    return HttpResponse(pdf, content_type='application/pdf')
 
 def DETAIL_PRODUCT(request,cat,scat,slug):
     vendor = Vendor.objects.all()

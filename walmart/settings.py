@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'crispy_forms',
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -132,6 +134,14 @@ LOGOUT_REDIRECT_URL = 'login'
 
 KEY_ID = 'rzp_test_jTfXNi6r1KcPOU'
 KEY_SECRET = 'DCOloUbmjuKnc469Z2FIqJVa'
+
+
+EMAIL_USE_TLS= True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'shadowattacker24@gmail.com'
+EMAIL_HOST_PASSWORD = 'xaegyljrobyamexi'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 

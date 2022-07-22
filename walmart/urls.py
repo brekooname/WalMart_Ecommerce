@@ -44,6 +44,7 @@ urlpatterns = [
     path('vendor/add-product/',views.ADDPRODUCT,name='add-product'),
     path('vendor/publish/<status>/<id>',views.PUBLISHPRODUCT,name='publish-product'),
     path('vendor/order/<status>/<id>',views.VENDORORDER,name='vendor-order'),
+    path('vendor/order-bill/<id>',views.BILL,name='bill'),
     path('product/<cat>/<scat>/<slug>',views.DETAIL_PRODUCT,name='detail_product'),
     path('product/fillter-data', views.FILLTER_DATA,name='fillter_data'),
     path('product/review/<slug>', views.REVIEW,name='review'),

@@ -1,7 +1,7 @@
 from django import template
 import math
 from django.db.models import Sum
-from app.models import Product, SubCategory, SubDistrict, Vendor
+from app.models import *
 register = template.Library()
 
 @register.simple_tag
@@ -98,3 +98,9 @@ def order_special_product(product):
     print(sortedlist)
     print(pr)
     return sortedlist
+
+@register.simple_tag
+def get_user_address(user):
+    add = Address.objects.get(user=user)
+    return add
+

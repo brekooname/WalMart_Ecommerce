@@ -245,6 +245,7 @@
                                             <th scope="col">Status</th>
                                             <th scope="col">Ship</th>
                                             <th scope="col">Cancel</th>
+                                            <th scope="col">Bill</th>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -297,6 +298,11 @@
                                                             </a>
                                                         </td>
                                                     {% endif %}
+                                                    <td>
+                                                        <a href="/vendor/order-bill/{{p.id}}" type="submit" target="_blank" class="btn btn-primary ">
+                                                            Print
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             {% endfor %}
                                         </tbody>

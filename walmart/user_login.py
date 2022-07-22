@@ -81,18 +81,19 @@ def PROFILEUPDATE(request):
     if request.method == "POST":
         fname = request.POST.get('firstname')
         lname = request.POST.get('lastname')
-        email = request.POST.get('email')
-        pwd = request.POST.get('password')
+        email = request.POST.get('em')
+        pwd = request.POST.get('pass')
 
         userid = request.user.id
         user = User.objects.get(id=userid)
+        user.email = email
         user.first_name = fname
         user.last_name = lname
 
         if pwd != None and pwd != "":
             user.set_password(pwd)
         user.save()
-        return redirect('profile')
+        return redirect('home')
     
     return None
 

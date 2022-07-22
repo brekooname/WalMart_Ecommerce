@@ -1,0 +1,121 @@
+<html>
+<head>
+    {% load product_tags %}
+    <style>
+    body {
+        font-family: sans-serif;
+        font-size: 10pt;
+    }
+
+    p {
+        margin: 0pt;
+    }
+
+    table.items {
+        border: 0.1mm solid #e7e7e7;
+    }
+
+    td {
+        vertical-align: top;
+    }
+
+    .items td {
+        border-left: 0.1mm solid #e7e7e7;
+        border-right: 0.1mm solid #e7e7e7;
+    }
+
+    table thead td {
+        text-align: center;
+        border: 0.1mm solid #e7e7e7;
+    }
+
+    .items td.blanktotal {
+        background-color: #EEEEEE;
+        border: 0.1mm solid #e7e7e7;
+        background-color: #FFFFFF;
+        border: 0mm none #e7e7e7;
+        border-top: 0.1mm solid #e7e7e7;
+        border-right: 0.1mm solid #e7e7e7;
+    }
+
+    .items td.totals {
+        text-align: right;
+        border: 0.1mm solid #e7e7e7;
+    }
+
+    .items td.cost {
+        text-align: "."center;
+    }
+    </style>
+</head>
+
+<body>
+    <table width="100%" style="font-family: sans-serif;" cellpadding="10">
+        <tr>
+            <td width="100%" style="text-align: center; font-size: 20px; font-weight: bold; padding: 0px;">
+              INVOICE
+            </td>
+        </tr>
+        <tr>
+          <td height="10" style="font-size: 0px; line-height: 10px; height: 10px; padding: 0px;">&nbsp;</td>
+        </tr>
+    </table>
+    <table width="100%" style="font-family: sans-serif;" cellpadding="10">
+        <!---For user address-->{% get_user_address order.user as add %}
+        <!---For vendor address-->{% get_user_address order.vendor.user as vadd %}
+        <tr>
+            <td width="49%" style="border: 0.1mm solid #eee;"><strong>To</strong><br><br>Name: {{order.user.username | capfirst}}<br>Email : {{order.user.email}}<br>{{add.street}}<br>{{add.subdistrict}}<br>{{add.district}}<br>{{add.state}}<br>{{add.pin}}</td>
+            <td width="2%">&nbsp;</td>
+            <td width="49%" style="border: 0.1mm solid #eee; text-align: right;"><strong>From</strong><br><br><strong>{{order.vendor.shop_name | capfirst}}</strong><br>{{order.vendor.shop_url}}<br>Email : {{order.vendor.user.email}}<br>{{vadd.street}}<br>{{vadd.subdistrict}}<br>{{vadd.district}}<br>{{vadd.state}}<br>{{vadd.pin}}</td>
+        </tr>
+    </table>
+    <br>
+    <table class="items" width="100%" style="font-size: 14px; border-collapse: collapse;" cellpadding="8">
+        <tr>
+            <th>Order Id</th>
+            <th>Payment Id</th>
+            <th>Order Date</th>
+            <th>Ship Date</th>
+        </tr>
+            <tr>
+                <td style="text-align: center;">{{order.order_id}}</td>
+                <td style="text-align: center;">{{order.payment_id}}</td>
+                <td style="text-align: center;">{{order.orderdate}}</td>
+                <td style="text-align: center;">{{order.shipdate}}</td>
+            </tr>
+    </table>
+    <br>
+    <table class="items" width="100%" style="font-size: 14px; border-collapse: collapse;" cellpadding="8">
+        <tr>
+            <th>No</th>
+            <th>Product</th>
+            <th>Color</th>
+            <th>Size</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+            <tr>{% discount_price order.product.price order.product.discount as disprice %}
+                <td style="text-align: center;">{{forloop.counter}}</td>
+                <td style="text-align: center;">{{order.product.title}}</td>
+                <td style="text-align: center;">{{order.color}}</td>
+                <td style="text-align: center;">{{order.size}}</td>
+                <td style="text-align: center;">{{order.quantity}}</td>
+                <td style="text-align: center;">{{order.product.price}}</td>
+                <td style="text-align: center;">{% cart_item_total disprice order.quantity %}</td>
+            </tr>
+    </table>
+    <br>
+    <table class="items" width="100%" style="font-family: sans-serif; font-size: 14px; border-collapse: collapse;" cellpadding="8">
+        <tr>
+            <th>Sub Total</th>
+            <th>Grand Total</th>
+        </tr>
+        <tr>
+            <td style="text-align: center;">{% cart_item_total disprice order.quantity %}</td>
+            <td style="text-align: center;">{% cart_item_total disprice order.quantity %}</td>
+        </tr>
+    </table>
+    <br>
+</body>
+</html>
