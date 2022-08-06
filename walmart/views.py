@@ -27,6 +27,7 @@ def BASE(request):
 
 def HOME(request):
     category = Category.objects.all().order_by('id')[:10]
+    banner = Banner.objects.all().order_by('id')
     product = Product.objects.filter(status="PUBLISH").order_by('-id')[:8]
     
     vendor = Vendor.objects.all()
@@ -39,6 +40,7 @@ def HOME(request):
         'vendor':vendor,
         'category':category,
         'product':product,
+        'banner':banner,
         'featured_product':featured_product,
         'best_seller':best_seller,
         'special_offer':special_offer,

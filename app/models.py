@@ -145,4 +145,12 @@ class Order(models.Model):
 
     def __str__(self):
         return self.vendor.shop_name + " - " + self.user.username + " - " + self.product.title
-  
+
+class Banner(models.Model):
+    title = models.CharField(max_length=500,null=True)
+    Description = models.CharField(max_length=500,null=True)
+    image = models.ImageField(upload_to='banner',null=True)
+    link = models.CharField(max_length=500,null=True)
+
+    def __str__(self):
+        return self.title
