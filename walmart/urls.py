@@ -50,5 +50,6 @@ urlpatterns = [
     path('product/review/<slug>', views.REVIEW,name='review'),
     path('checkout', views.CHECKOUT,name='checkout'),
     path('verify_payment',views.VERIFY_PAYMENT,name='verify_payment'),
+    path('search/',views.SEARCH,name='search'),
     
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

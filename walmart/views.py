@@ -371,3 +371,23 @@ def VERIFY_PAYMENT(request):
             return render(request,'verify_payments/fail.html')
             
     return None
+
+def SEARCH(request):
+    vendor = Vendor.objects.all()
+
+    if request.method=="GET":
+        search = request.GET.get('search')
+        product = Product.objects.filter(title__icontains=search)
+        # print(product)
+        data={
+            'vendor':vendor,
+            'title':search,
+            'product':product,
+        }
+        return render(request,'search/search.html',data)
+
+    data={
+        'vendor':vendor,
+        'title':search,
+    }
+    return render(request,'search/search.html',data)
