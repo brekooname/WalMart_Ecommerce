@@ -64,6 +64,7 @@ class Product(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     slug = AutoSlugField(populate_from='title',unique=True,null=True,default=None)
     status = models.CharField(choices=sts,null=True,max_length=200)
+    tags = models.CharField(null=True,max_length=200,blank=True)
 
     def __str__(self):
         return self.vendor.shop_name + " - " + self.title

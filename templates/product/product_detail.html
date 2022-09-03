@@ -21,7 +21,6 @@
 			<div class='col-md-3 sidebar'>
 				<div class="sidebar-module-container">
 				<div class="home-banner outer-top-n">
-<img src="/static/assets/images/banners/LHS-banner.jpg" alt="Image">
 </div>		
   
     
@@ -38,20 +37,7 @@
 			  <div class="image"> <img src="/media/{% product_img_src p.image1 %}" alt=""> </div>
 			  <div class="sale-offer-tag"><span>{{p.discount}}%<br>
 				off</span></div>
-			  <div class="timing-wrapper">
-				<div class="box-wrapper">
-				  <div class="date box"> <span class="key">120</span> <span class="value">DAYS</span> </div>
-				</div>
-				<div class="box-wrapper">
-				  <div class="hour box"> <span class="key">20</span> <span class="value">HRS</span> </div>
-				</div>
-				<div class="box-wrapper">
-				  <div class="minutes box"> <span class="key">36</span> <span class="value">MINS</span> </div>
-				</div>
-				<div class="box-wrapper hidden-md">
-				  <div class="seconds box"> <span class="key">60</span> <span class="value">SEC</span> </div>
-				</div>
-			  </div>
+			  
 			</div>
 			<!-- /.hot-deal-wrapper -->
 			
@@ -414,14 +400,13 @@
 									<div class="product-tag">
 										
 										<h4 class="title">Product Tags</h4>
-										<form role="form" class="form-inline form-cnt">
+										<form role="form" method="post" class="form-inline form-cnt" action="/product/{{product.maincategory}}/{{product.subcategory}}/{{product.slug}}/add-tags">
+											{% csrf_token %}
 											<div class="form-container">
 									
 												<div class="form-group">
 													<label for="exampleInputTag">Add Your Tags: </label>
-													<input type="email" id="exampleInputTag" class="form-control txt">
-													
-
+													<input type="text" id="exampleInputTag" class="form-control txt" name="tags">
 												</div>
 
 												<button class="btn btn-upper btn-primary" type="submit">ADD TAGS</button>
@@ -431,7 +416,7 @@
 										<form role="form" class="form-inline form-cnt">
 											<div class="form-group">
 												<label>&nbsp;</label>
-												<span class="text col-md-offset-3">Use spaces to separate tags. Use single quotes (') for phrases.</span>
+												<span class="text col-md-offset-3">Use comma to separate tags. Use single quotes (') for phrases.</span>
 											</div>
 										</form><!-- /.form-cnt -->
 

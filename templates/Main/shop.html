@@ -179,26 +179,6 @@
               </div>
               <!-- /.sidebar-widget --> 
               <!-- ============================================== PRICE SILDER : END ============================================== --> 
-              <!-- ============================================== MANUFACTURES============================================== -->
-              <div class="sidebar-widget wow fadeInUp">
-                <div class="widget-header">
-                  <h4 class="widget-title">Manufactures</h4>
-                </div>
-                <div class="sidebar-widget-body">
-                  <ul class="list">
-                    <li><a href="#">Forever 18</a></li>
-                    <li><a href="#">Nike</a></li>
-                    <li><a href="#">Dolce & Gabbana</a></li>
-                    <li><a href="#">Alluare</a></li>
-                    <li><a href="#">Chanel</a></li>
-                    <li><a href="#">Other Brand</a></li>
-                  </ul>
-                  <!--<a href="#" class="lnk btn btn-primary">Show Now</a>--> 
-                </div>
-                <!-- /.sidebar-widget-body --> 
-              </div>
-              <!-- /.sidebar-widget --> 
-              <!-- ============================================== MANUFACTURES: END ============================================== --> 
               <!-- ============================================== COLOR============================================== -->
               <div class="sidebar-widget wow fadeInUp">
                 <div class="widget-header">
@@ -241,39 +221,6 @@
                 <!-- /.sidebar-widget-body --> 
               </div>
               <!-- /.sidebar-widget --> 
-            <!----------- Testimonials------------->
-              <div class="sidebar-widget  wow fadeInUp outer-top-vs ">
-                <div id="advertisement" class="advertisement">
-                  <div class="item">
-                    <div class="avatar"><img src="/static/assets/images/testimonials/member1.png" alt="Image"></div>
-                    <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                    <div class="clients_author">John Doe <span>Abc Company</span> </div>
-                    <!-- /.container-fluid --> 
-                  </div>
-                  <!-- /.item -->
-                  
-                  <div class="item">
-                    <div class="avatar"><img src="/static/assets/images/testimonials/member3.png" alt="Image"></div>
-                    <div class="testimonials"><em>"</em>Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                    <div class="clients_author">Stephen Doe <span>Xperia Designs</span> </div>
-                  </div>
-                  <!-- /.item -->
-                  
-                  <div class="item">
-                    <div class="avatar"><img src="/static/assets/images/testimonials/member2.png" alt="Image"></div>
-                    <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                    <div class="clients_author">Saraha Smith <span>Datsun &amp; Co</span> </div>
-                    <!-- /.container-fluid --> 
-                  </div>
-                  <!-- /.item --> 
-                  
-                </div>
-                <!-- /.owl-carousel --> 
-              </div>
-              
-              <!-- ============================================== Testimonials: END ============================================== -->
-              
-              <div class="home-banner"> <img src="/static/assets/images/banners/LHS-banner.jpg" alt="Image"> </div>
             </div>
             <!-- /.sidebar-filter --> 
           </div>
@@ -283,7 +230,7 @@
         <div class='col-md-9'> 
           <!-- ========================================== SECTION – HERO ========================================= -->
           
-          <div id="category" class="category-carousel hidden-xs">
+          {% comment %} <div id="category" class="category-carousel hidden-xs">
             <div class="item">
               <div class="image"> <img src="/static/assets/images/banners/cat-banner-1.jpg" alt="" class="img-responsive"> </div>
               <div class="container-fluid">
@@ -296,8 +243,28 @@
               </div>
               <!-- /.container-fluid --> 
             </div>
+          </div> {% endcomment %}
+          <div id="hero">
+            <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
+              {% for b in banner %}
+                <div class="item" style="background-image: url(/media/{{b.image}});">
+                  <div class="container-fluid">
+                    <div class="caption bg-color vertical-center text-left">
+                      <div class="slider-header fadeInDown-1">Top Brands</div>
+                      <div class="big-text fadeInDown-1">{{b.title}}</div>
+                      <div class="excerpt fadeInDown-2 hidden-xs"> <span>{{b.Description}}</span> </div>
+                      <div class="button-holder fadeInDown-3"> <a href="{{b.link}}" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
+                    </div>
+                    <!-- /.caption --> 
+                  </div>
+                  <!-- /.container-fluid --> 
+                </div>
+                <!-- /.item -->
+              {% endfor %}
+              
+            </div>
+            <!-- /.owl-carousel --> 
           </div>
-          
        
           <div class="clearfix filters-container m-t-10">
             <div class="row">
@@ -329,31 +296,6 @@
                   </div>
                   <!-- /.lbl-cnt --> 
                 </div>
-                <!-- /.col -->
-                <div class="col col-sm-3 col-md-6 no-padding">
-                  <div class="lbl-cnt"> <span class="lbl">Show</span>
-                    <div class="fld inline">
-                      <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-                        <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> 1 <span class="caret"></span> </button>
-                        <ul role="menu" class="dropdown-menu">
-                          <li role="presentation"><a href="#">1</a></li>
-                          <li role="presentation"><a href="#">2</a></li>
-                          <li role="presentation"><a href="#">3</a></li>
-                          <li role="presentation"><a href="#">4</a></li>
-                          <li role="presentation"><a href="#">5</a></li>
-                          <li role="presentation"><a href="#">6</a></li>
-                          <li role="presentation"><a href="#">7</a></li>
-                          <li role="presentation"><a href="#">8</a></li>
-                          <li role="presentation"><a href="#">9</a></li>
-                          <li role="presentation"><a href="#">10</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <!-- /.fld --> 
-                  </div>
-                  <!-- /.lbl-cnt --> 
-                </div>
-                <!-- /.col --> 
               </div>
               <!-- /.col -->
               <div class="col col-sm-6 col-md-4 text-right">

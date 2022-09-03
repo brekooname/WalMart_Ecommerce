@@ -60,12 +60,14 @@ def CONTACT(request):
 def SHOP(request):
     category = Category.objects.all().order_by('id')[:10]
     product = Product.objects.filter(status="PUBLISH").order_by('-id')
+    banner = Banner.objects.all().order_by('id')
     
     vendor = Vendor.objects.all()
     data = {
         'vendor':vendor,
         'category':category,
         'product':product,
+        'banner':banner,
     }
     return render(request,"Main/shop.html",data)
 
@@ -391,3 +393,21 @@ def SEARCH(request):
         'title':search,
     }
     return render(request,'search/search.html',data)
+
+def ADDTAGS(request,cat,scat,slug):
+
+    product = Product.objects.filter(slug=slug)
+
+    if product.exists():
+        if request.method == 'POST':
+            # print(product.first().tags)
+            tags = request.POST.get('tags')
+            p = Product.objects.get(slug=slug)
+            if product.first().tags == None:
+                p.tags = tags
+                p.save()
+                return redirect('home')
+            else:
+                p.tags = product.first().tags+','+tags
+                p.save()
+                return redirect('home')
