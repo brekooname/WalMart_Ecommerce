@@ -40,6 +40,9 @@
                             <li class="nav-item">
                                 <a href="#vendor-order"  id="order-tab" data-toggle="tab"  role="tab" aria-controls="order" aria-selected="true" class="nav-link">Order</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="#vendor-blog"  id="blog-tab" data-toggle="tab"  role="tab" aria-controls="blog" aria-selected="true" class="nav-link">Blog</a>
+                            </li>
                         </ul>
 
                         <div class="container-fluid" style="background-color: white;display: flex;justify-content: center;">
@@ -303,6 +306,78 @@
                                             {% endfor %}
                                         </tbody>
                                       </table>
+                                </div>
+                                <div class="tab-pane" id="vendor-blog" id="vendor-blog" role="tabpanel" aria-labelledby="newblog">
+                                    <div class="container row">
+                                        <div class="col-md-4 col-sm-12"">
+                                            <div class="container-fluid">
+                                                
+                                                <div class="icon-box icon-box-side icon-box-light">
+                                                    <span class="icon-box-icon icon-account mr-2">
+                                                        <i class="w-icon-user"></i>
+                                                    </span>
+                                                    <div class="icon-box-content">
+                                                        <h4 class="icon-box-title mb-0 ls-normal">New Blog</h4>
+                                                    </div>
+                                                </div>
+                                                <form class="form " action=" {% url 'add-blog' %} "  enctype="multipart/form-data" method="post">
+                                                    {% csrf_token %}
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group mb-3">
+                                                                <input type="file" class="unicase-form-control text-input" name="image" id="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                  
+                                                    <div class="form-group mb-3">
+                                                        <label  class="info-title text-dark display-5" for="title">Blog Title</label>
+                                                        <input type="text" class="unicase-form-control text-input form-control form-control-md" id="title"  name="title">
+                                                    </div>
+                                                    <div class="form-group mb-3">
+                                                        <label  class="info-title text-dark display-5" for="date">Blog Date</label>
+                                                        <input type="date" class="unicase-form-control text-input form-control form-control-md" id="date"  name="date">
+                                                    </div>
+                                                    <div class="form-group mb-3">
+                                                        <label  class="info-title text-dark display-5" for="description">Blog Description</label><br>
+                                                        <textarea name="description" id="description" ></textarea>
+                                                    </div>
+            
+                                                    <button type="submit" class="btn-upper btn btn-primary">ADD BLOG</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-sm-12">
+                                            <div class="container-fluid">
+                                                <table class="table">
+                                                    <thead>
+                                                      <tr>
+                                                        <th scope="col">No.</th>
+                                                        <th scope="col">Title</th>
+                                                        <th scope="col">Date</th>
+                                                        <th scope="col">Delete</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for b in blog %}
+                                                            <tr>
+                                                                <th scope="row">{{forloop.counter}}</th>
+                                                                <td>{{b.title}}</td>
+                                                                <td>{{b.date}}</td>
+                                                                <td>
+                                                                    <a href="/vendor/add-blog/delete/{{b.id}}" type="submit" class="btn btn-danger ">
+                                                                        DELETE
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                  </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

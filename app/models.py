@@ -155,3 +155,15 @@ class Banner(models.Model):
 
     def __str__(self):
         return self.title
+
+class Blog(models.Model):
+    title = models.CharField(max_length=500,null=True)
+    vendor = models.ForeignKey(Vendor,on_delete=models.CASCADE,null=True)
+    description = models.CharField(max_length=500,null=True)
+    image = models.ImageField(upload_to='blog',null=True)
+    date = models.DateField()
+
+    def __str__(self):
+        return self.title
+
+

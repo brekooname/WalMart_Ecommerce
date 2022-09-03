@@ -31,6 +31,7 @@ def HOME(request):
     product = Product.objects.filter(status="PUBLISH").order_by('-id')[:8]
     
     vendor = Vendor.objects.all()
+    blog = Blog.objects.all().order_by('-date')
 
     featured_product = Product.objects.filter(status="PUBLISH").annotate(avg = Avg('review__rate')).order_by('-avg')[:8]
     best_seller = Product.objects.filter(status="PUBLISH").annotate(count = Count('order')).order_by('-count')[:8]
@@ -41,6 +42,7 @@ def HOME(request):
         'category':category,
         'product':product,
         'banner':banner,
+        'blog':blog,
         'featured_product':featured_product,
         'best_seller':best_seller,
         'special_offer':special_offer,
@@ -89,6 +91,7 @@ def VENDOR(request):
     activeproduct = Product.objects.filter(vendor=v,status="PUBLISH")
     product = Product.objects.filter(vendor=v).order_by('-id')
     order = Order.objects.filter(vendor=v).order_by('-id')
+    blog = Blog.objects.filter(vendor=v).order_by('-id')
     pendingorder = Order.objects.filter(vendor=v,status="PENDING").count()
     shippinggorder = Order.objects.filter(vendor=v,status="SHIPPING").count()
     shipedorder = Order.objects.filter(vendor=v,status="SHIPED").count()
@@ -101,6 +104,7 @@ def VENDOR(request):
         'categoryall':categoryall,
         'product':product,
         'order':order,
+        'blog':blog,
         'pendingorder':pendingorder,
         'shippinggorder':shippinggorder,
         'shipedorder':shipedorder,
@@ -203,6 +207,28 @@ def ADDPRODUCT(request):
     }
     return render(request,"vendor/add-product.html",data)
 
+def ADDBLOG(request):
+    if request.method == "POST":
+        title = request.POST.get("title")
+        date = request.POST.get("date")
+        description = request.POST.get("description")
+        image = request.FILES['image']
+        blog = Blog(
+            title=title,
+            date= date,
+            description=description,
+            image=image,
+            vendor=Vendor.objects.get(user=request.user)
+        )
+        blog.save()
+        return redirect('vendor')
+    return redirect('home')
+
+def DELETEBLOG(request,id):
+    blog = Blog.objects.get(id=id)
+    blog.delete()
+
+    return redirect('vendor')
 
 def render_to_pdf(template_src, context_dict={}):
 	template = get_template(template_src)
