@@ -9,10 +9,7 @@
 <div class="col-md-6 col-sm-6 sign-in">
 	<h4 class="">Sign in</h4>
 	<p class="">Hello, Welcome to your account.</p>
-	{% comment %} <div class="social-sign-in outer-top-xs">
-		<a href="#" class="facebook-sign-in"><i class="fa fa-facebook"></i> Sign In with Facebook</a>
-		<a href="#" class="twitter-sign-in"><i class="fa fa-twitter"></i> Sign In with Twitter</a>
-	</div> {% endcomment %}
+	
 	<form class="register-form outer-top-xs" role="form" action=" {% url 'dologin' %} " method="post" >
 		{% csrf_token %}
 		<div class="form-group">
@@ -63,11 +60,11 @@
 			<label for="check-seller" class="check-seller">I am a vendor</label>
 		</div>
         <div class="form-group">
-		    <label class="info-title" for="sname">Shop Name <span>*</span></label>
+		    <label class="info-title" for="sname">Shop Name</label>
 		    <input type="text" name="shop-name" class="form-control unicase-form-control text-input" id="sname" >
 		</div>
          <div class="form-group">
-		    <label class="info-title" for="surl">Shop Url <span>*</span></label>
+		    <label class="info-title" for="surl">Shop Url</label>
 		    <input type="url" name="shop-url" class="form-control unicase-form-control text-input" id="surl" >
 		</div>
 	  	<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Sign Up</button>

@@ -384,7 +384,7 @@ def VERIFY_PAYMENT(request):
                 p.save()
             context = {
                 'data':data,
-                'payment':payment,
+                'payment':payment
             }
             return render(request,'verify_payments/success.html',context)
 
