@@ -109,3 +109,15 @@ def get_user_address(user):
     add = Address.objects.get(user=user)
     return add
 
+@register.simple_tag
+def is_own_product(user,product):
+    vendor = Vendor.objects.filter(user=user)
+    product = Product.objects.get(id=product.id)
+    if vendor.exists:
+        vendor = Vendor.objects.get(user=user)
+        if vendor.id == product.vendor.id:
+            return True
+        else:
+            return False
+    return False
+

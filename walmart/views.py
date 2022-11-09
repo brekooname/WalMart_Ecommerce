@@ -56,6 +56,7 @@ def CONTACT(request):
     vendor = Vendor.objects.all()
     data = {
         'category':category,
+        'vendor':vendor,
     }
     return render(request,"Main/contact.html",data)
 
@@ -79,6 +80,7 @@ def ABOUT(request):
     vendor = Vendor.objects.all()
     data = {
         'category':category,
+        'vendor':vendor,
     }
     return render(request,"Main/about.html",data)
 
@@ -402,12 +404,13 @@ def VERIFY_PAYMENT(request):
 
 def SEARCH(request):
     vendor = Vendor.objects.all()
-
+    category = Category.objects.all().order_by('id')[:10]
     if request.method=="GET":
         search = request.GET.get('search')
         product = Product.objects.filter(title__icontains=search)
         # print(product)
         data={
+            'category':category,
             'vendor':vendor,
             'title':search,
             'product':product,
@@ -415,6 +418,7 @@ def SEARCH(request):
         return render(request,'search/search.html',data)
 
     data={
+        'category':category,
         'vendor':vendor,
         'title':search,
     }

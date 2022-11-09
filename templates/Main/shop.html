@@ -144,7 +144,7 @@
                            <div class="slider-header fadeInDown-1">Top Brands</div>
                            <div class="big-text fadeInDown-1">{{b.title}}</div>
                            <div class="excerpt fadeInDown-2 hidden-xs"> <span>{{b.Description}}</span> </div>
-                           <div class="button-holder fadeInDown-3"> <a href="{{b.link}}" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
+                           <div class="button-holder fadeInDown-3"> <a href="{% if user.is_authenticated %}{{b.link}}{% endif %}" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
                         </div>
                         <!-- /.caption --> 
                      </div>
@@ -167,7 +167,7 @@
                      <!-- /.filter-tabs --> 
                   </div>
                   <!-- /.col -->
-                  <div class="col col-sm-6 col-md-12 text-right">
+                  <!--<div class="col col-sm-6 col-md-12 text-right">
                      <div class="pagination-container">
                         <ul class="list-inline list-unstyled">
                            <li class="prev"><a href="#"><i class="fa fa-angle-left"></i></a></li>
@@ -177,11 +177,8 @@
                            <li><a href="#">4</a></li>
                            <li class="next"><a href="#"><i class="fa fa-angle-right"></i></a></li>
                         </ul>
-                        <!-- /.list-inline --> 
                      </div>
-                     <!-- /.pagination-container --> 
-                  </div>
-                  <!-- /.col --> 
+                  </div>-->
                </div>
                <!-- /.row --> 
             </div>
@@ -297,7 +294,7 @@
                   <!-- /.tab-pane #list-container --> 
                </div>
                <!-- /.tab-content -->
-               <div class="clearfix filters-container">
+               <!--<div class="clearfix filters-container">
                   <div class="text-right">
                      <div class="pagination-container">
                         <ul class="list-inline list-unstyled">
@@ -307,13 +304,10 @@
                            <li><a href="#">3</a></li>
                            <li><a href="#">4</a></li>
                            <li class="next"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                        </ul>
-                        <!-- /.list-inline --> 
+                        </ul> 
                      </div>
-                     <!-- /.pagination-container --> 
                   </div>
-                  <!-- /.text-right --> 
-               </div>
+               </div>-->
                <!-- /.filters-container --> 
             </div>
             <!-- /.search-result-container --> 
