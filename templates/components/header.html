@@ -152,7 +152,7 @@
                   </li>
 
 
-                  <li class="hidden-sm"> <a href=" {% url 'contact' %} ">Contact Us</a> </li>
+                  {% comment %} <li class="hidden-sm"> <a href=" {% url 'contact' %} ">Contact Us</a> </li> {% endcomment %}
                   <li class=""> <a href=" {% url 'about' %} ">About Us</a> </li>
 
                   {% if user.is_authenticated %}
