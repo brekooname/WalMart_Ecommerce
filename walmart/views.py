@@ -321,6 +321,9 @@ def CHECKOUT(request):
     total = cart_sub_total(cart)
     action = request.GET.get('action')
     order = None
+
+    vendor = Vendor.objects.all()
+    category = Category.objects.all().order_by('id')[:10]
     
     shipdate = date.today()
     if int(str(date.today())[8:]) > 23:
@@ -365,6 +368,8 @@ def CHECKOUT(request):
                 )
             pay.save()
     data = {
+        'vendor':vendor,
+        'category':category,
         'cart':cart,
         'order':order,
         'add':add.first(),
