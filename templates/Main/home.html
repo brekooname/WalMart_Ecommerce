@@ -101,6 +101,10 @@
                         <form class="add-cart-button btn-group" method="get" action=" {% if user.is_authenticated %}{% url 'add-cart' %} {% endif %}">
                           <input type="text" name="slug" value="{{p.slug}}" hidden>
                           <input type="text" name="qty" value="1" hidden>
+                          {% product_color p.color as color %}
+                          {% product_size p.size as size %}
+                          <input type="text" name="color" value="{{color.0}}" hidden>
+                          <input type="text" name="size" value="{{size.0}}" hidden>
                           <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
                           <button class="btn btn-primary cart-btn" type="submit">Add to cart</button>
                         </form>
@@ -253,6 +257,10 @@
                                     <form class="add-cart-button btn-group" method="get" action="{% if user.is_authenticated %} {% url 'add-cart' %}{% endif %} ">
                                       <input type="text" name="slug" value="{{p.slug}}" hidden>
                                       <input type="text" name="qty" value="1" hidden>
+                                      {% product_color p.color as color %}
+                                      {% product_size p.size as size %}
+                                      <input type="text" name="color" value="{{color.0}}" hidden>
+                                      <input type="text" name="size" value="{{size.0}}" hidden>
                                       <button data-toggle="tooltip" class="btn btn-primary icon" type="submit" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
                                     </form>
                                   </li>
@@ -310,6 +318,10 @@
                                       <form class="add-cart-button btn-group" method="get" action=" {% if user.is_authenticated %}{% url 'add-cart' %} {% endif %}">
                                         <input type="text" name="slug" value="{{p.slug}}" hidden>
                                         <input type="text" name="qty" value="1" hidden>
+                                        {% product_color p.color as color %}
+                                        {% product_size p.size as size %}
+                                        <input type="text" name="color" value="{{color.0}}" hidden>
+                                        <input type="text" name="size" value="{{size.0}}" hidden>
                                         <button data-toggle="tooltip" class="btn btn-primary icon" type="submit" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
                                       </form>
                                       <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
@@ -377,6 +389,10 @@
                                 <form class="add-cart-button btn-group" method="get" action="{% if user.is_authenticated %} {% url 'add-cart' %} {% endif %}">
                                   <input type="text" name="slug" value="{{p.slug}}" hidden>
                                   <input type="text" name="qty" value="1" hidden>
+                                  {% product_color p.color as color %}
+                                  {% product_size p.size as size %}
+                                  <input type="text" name="color" value="{{color.0}}" hidden>
+                                  <input type="text" name="size" value="{{size.0}}" hidden>
                                   <button data-toggle="tooltip" class="btn btn-primary icon" type="submit" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
                                 </form>
                                 <button class="btn btn-primary cart-btn" type="button">Add to cart</button>

@@ -14,7 +14,7 @@ def discount_price(price,discount):
 @register.simple_tag
 def product_size(size):
     if size == None:
-        return []
+        return ["none"]
     
     s = str(size).split(",")
     return s
@@ -22,7 +22,7 @@ def product_size(size):
 @register.simple_tag
 def product_color(color):
     if color == None:
-        return []
+        return ["none"]
     
     c = str(color).split(",")
     return c

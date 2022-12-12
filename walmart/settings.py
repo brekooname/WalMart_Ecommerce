@@ -132,8 +132,8 @@ MEDIA_URL = "/media/"
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
 
-KEY_ID = 'rzp_test_jTfXNi6r1KcPOU'
-KEY_SECRET = 'DCOloUbmjuKnc469Z2FIqJVa'
+KEY_ID = 'rzp_test_xw4gglzg9XYJrG'
+KEY_SECRET = 'wvkbDaQg9KEomkeXwfyfdRVh'
 
 
 EMAIL_USE_TLS= True

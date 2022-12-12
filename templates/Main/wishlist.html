@@ -48,6 +48,10 @@
 							<form class="add-cart-button btn-group" method="get" action=" {% url 'add-cart' %} ">
 								<input type="text" name="slug" value="{{p.product.slug}}" hidden>
 								<input type="text" name="qty" value="1" hidden>
+								{% product_color p.product.color as color %}
+								{% product_size p.product.size as size %}
+								<input type="text" name="color" value="{{color.0}}" hidden>
+								<input type="text" name="size" value="{{size.0}}" hidden>
 							  <button class="btn btn-primary cart-btn" type="submit">Add to cart</button>
 							</form>
                         </td>

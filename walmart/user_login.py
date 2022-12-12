@@ -147,8 +147,15 @@ def ADDCART(request):
     size = request.GET.get('size')
     color = request.GET.get('color')
 
+        
+
     product = Product.objects.filter(slug=slug)
     if product.exists():
+        # print(product.first().maincategory)
+        if size == None or color == None:
+            messages.warning(request,"Please select size and color !")
+            return redirect("/product/"+str(product.first().maincategory)+"/"+str(product.first().subcategory)+"/"+slug)
+
         check = Cart.objects.filter(user=request.user,product=product.first())
         if check.exists():
             return redirect('cart')
@@ -163,6 +170,7 @@ def ADDCART(request):
             cart.save()
             return redirect('cart')
     else:
+        messages.warning(request,"Product is not exists !")
         return redirect('home')
 
 def REMOVECART(request,slug):

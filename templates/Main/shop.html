@@ -212,6 +212,10 @@
                                                 <form class="add-cart-button btn-group" method="get" action=" {% if user.is_authenticated %}{% url 'add-cart' %}{% endif %} ">
                                                    <input type="text" name="slug" value="{{p.slug}}" hidden>
                                                    <input type="text" name="qty" value="1" hidden>
+                                                   {% product_color p.color as color %}
+                                                   {% product_size p.size as size %}
+                                                   <input type="text" name="color" value="{{color.0}}" hidden>
+                                                   <input type="text" name="size" value="{{size.0}}" hidden>
                                                    <button data-toggle="tooltip" class="btn btn-primary icon" type="submit" title="Add Cart"> <i class="fa fa-shopping-cart"></i> </button>
                                                 </form>
                                              </li>

@@ -7,7 +7,7 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
         var options = {
-            "key":"rzp_test_jTfXNi6r1KcPOU",
+            "key":"rzp_test_xw4gglzg9XYJrG",
             "name":"Walmart Ecommerce",
             "amount":"{{order.amount}}",
             "description":"Payment for Product",
@@ -190,8 +190,9 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <form class="col-md-12 col-sm-12 ">
-                                            
-                                            <a href="?action=create_payment" class="btn btn-sm btn-primary" >PAYNOW</a>
+                                            {% if cart.count > 0 %}
+                                                <a href="?action=create_payment" class="btn btn-sm btn-primary" >PAYNOW</a>
+                                            {% endif %}
                                         </form>
                                     </div>	
                                 </div>

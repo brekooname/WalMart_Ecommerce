@@ -9,7 +9,7 @@ from django.core.files.storage import FileSystemStorage
 from django.template.loader import render_to_string
 from django.db.models import Avg
 import razorpay
-
+from django.contrib import messages
 from app.templatetags.product_tags import *
 from .settings import *
 from time import time
@@ -167,8 +167,18 @@ def ADDPRODUCT(request):
     if request.method == "POST":
         maincategory = request.POST.get('maincategory')
         subcategory = request.POST.get('subcategory')
-        image1 = request.FILES['image1']
-        image2 = request.FILES['image2']
+
+
+        i1 = request.POST.get('image1')
+        i2 = request.POST.get('image2')
+
+        if i1 == "" or i2 == "":
+            messages.warning(request,"Please select image !")
+            return redirect('vendor')
+        else:
+            image1 = request.FILES['image1']
+            image2 = request.FILES['image2']
+
         title = request.POST.get('title')
         description = request.POST.get('description')
         price = request.POST.get('price')
@@ -177,6 +187,23 @@ def ADDPRODUCT(request):
         size = request.POST.get('size')
         color = request.POST.get('color')
         status = request.POST.get('status')
+
+        if title == "":
+            messages.warning(request,"Please enter product title !")
+            return redirect('vendor')
+        if description == "":
+            messages.warning(request,"Please enter product description !")
+            return redirect('vendor')
+        if price == "":
+            messages.warning(request,"Please enter product price !")
+            return redirect('vendor')
+        if discount == "":
+            messages.warning(request,"Please enter product discount !")
+            return redirect('vendor')
+        if stock == "":
+            messages.warning(request,"Please enter product stock !")
+            return redirect('vendor')
+
 
         vendor = Vendor.objects.get(user=request.user)
 
@@ -207,14 +234,27 @@ def ADDPRODUCT(request):
     data = {
         'category':category,
     }
-    return render(request,"vendor/add-product.html",data)
+    return redirect('vendor',data)
 
 def ADDBLOG(request):
     if request.method == "POST":
         title = request.POST.get("title")
         date = request.POST.get("date")
         description = request.POST.get("description")
-        image = request.FILES['image']
+
+        if request.POST.get("image") == "":
+            messages.warning(request,"Please select image !")
+            return redirect('vendor')
+        else:
+            image = request.FILES['image']
+
+        if title == "":
+            messages.warning(request,"Please enter blog title !")
+            return redirect('vendor')
+        if description == "":
+            messages.warning(request,"Please enter blog description !")
+            return redirect('vendor')
+
         blog = Blog(
             title=title,
             date= date,
@@ -268,6 +308,7 @@ def FILLTER_DATA(request):
 
     product = request.GET.get('product')
     price = request.GET.get('price')
+    user = request.user
 
     if price:
         p = price.split(",")
@@ -287,7 +328,8 @@ def FILLTER_DATA(request):
         product = Product.objects.filter(status="PUBLISH").order_by('-id')
 
     data  = {
-        'product':product
+        'product':product,
+        'user':user
     }
     t = render_to_string('ajax/product.html',data)
 
