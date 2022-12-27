@@ -210,16 +210,17 @@
                                                     <td>{{p.stock}}</td>
                                                     {% if p.status == "PUBLISH" %}
                                                         <td>
-                                                            <a href="/vendor/publish/{{p.status}}/{{p.id}}" type="submit" class="btn btn-success btn-sm">
-                                                                {{p.status}}
+                                                            <a href="/vendor/publish/{{p.status}}/{{p.id}}" type="submit" class="btn btn-danger ">
+                                                                DRAFT
                                                             </a>
                                                         </td>
                                                     {% else %}
                                                         <td>
-                                                            <a href="/vendor/publish/{{p.status}}/{{p.id}}" type="submit" class="btn btn-danger ">
-                                                                {{p.status}}
+                                                            <a href="/vendor/publish/{{p.status}}/{{p.id}}" type="submit" class="btn btn-success btn-sm">
+                                                                PUBLISH
                                                             </a>
                                                         </td>
+                                                        
                                                     {% endif %}
                                                     <td>
                                                         <a href="/vendor/publish/DELETE/{{p.id}}" type="submit" class="btn btn-danger ">
@@ -256,7 +257,7 @@
                                                     <td>{{p.order_id}}</td>
                                                     <td>{{p.product.id}}</td>
                                                     <td>{{p.product.title}}</td>
-                                                    <td>{{p.product.price}}</td>
+                                                    <td>{% discount_price p.product.price p.product.discount %}</td>
                                                     <td>{{p.quantity}}</td>
                                                     <td>{{p.color}}</td>
                                                     <td>{{p.size}}</td>

@@ -141,7 +141,7 @@
                                             <th scope="row">{{forloop.counter}}</th>
                                             <td>{{p.order_id}}</td>
                                             <td>{{p.product.title}}</td>
-                                            <td>{{p.product.price}}</td>
+                                            <td>{% discount_price p.product.price p.product.discount %}</td>
                                             <td>{{p.quantity}}</td>
                                             <td>{{p.color}}</td>
                                             <td>{{p.size}}</td>
